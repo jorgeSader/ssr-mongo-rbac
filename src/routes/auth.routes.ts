@@ -2,8 +2,24 @@ import express from "express";
 
 const router = express.Router();
 
-router.get('/', (req, res, next) => {
-  res.send('Auth Routes!')
+// GETS
+router.get('/login', async (req, res, next) => {
+  res.render('login')
+})
+router.get('/register', async (req, res, next) => {
+  res.render('register')
+})
+router.get('/logout', async (req, res, next) => {
+  res.redirect('../')
 })
 
-export default router;
+
+// POSTS
+router.post('/login', async (req, res, next) => {
+  res.send('Login Post')
+})
+router.post('/register', async (req, res, next) => {
+  res.send('register Post')
+})
+
+export default router; 
