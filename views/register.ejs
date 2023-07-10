@@ -1,3 +1,21 @@
 <%- include('./layouts/header.ejs') %>
-<h1>Register Page</h1>
+
+<h1 class="title">Register</h1>
+<form action="/auth/register" method="post" class="form">
+  <div class="form-item">
+    <label class="form-lable" for="email">Email/Username</label>
+    <input class="form-input" type="email" name="email" id="email">
+  </div>
+  <div class="form-item">
+    <label class="form-label" for="password">Password</label>
+    <input class="form-passsword" type="password" name="password" id="password">
+  </div>
+  <div>
+    <button class="form-button" type="submit">Login</button>
+  </div>
+</form>
+<div>
+  <p>Already have an account? <span><a href="/auth/login">Login here</a>.</span></p>
+</div>
+
 <%- include('./layouts/footer.ejs') %>

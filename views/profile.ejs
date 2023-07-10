@@ -1,3 +1,23 @@
 <%- include('./layouts/header.ejs') %>
-<h1>User Profile Page</h1>
+
+<article class="profile-container">
+  <h1 class="profile-title"> <span class="go-back" onclick="window.history.back()">🡨</span>User Profile</h1>
+  <div>
+    <p class="profile-label">ID</p>
+    <p class="profile-value"></p>
+  </div>
+  <div>
+    <p class="profile-label">Email/Username</p>
+    <p class="profile-value"></p>
+  </div>
+  <div>
+    <p class="profile-label">Role</p>
+    <p class="profile-value"></p>
+  </div>
+  <div>
+    <p class="profile-label">User Object</p>
+    <pre class="profile-value"></pre>
+  </div>
+</article>
+
 <%- include('./layouts/footer.ejs') %>
