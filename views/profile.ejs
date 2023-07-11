@@ -1,23 +1,32 @@
 <%- include('./layouts/header.ejs') %>
 
-<article class="profile-container">
-  <h1 class="profile-title"> <span class="go-back" onclick="window.history.back()">🡨</span>User Profile</h1>
-  <div>
-    <p class="profile-label">ID</p>
-    <p class="profile-value"></p>
-  </div>
-  <div>
-    <p class="profile-label">Email/Username</p>
-    <p class="profile-value"></p>
-  </div>
-  <div>
-    <p class="profile-label">Role</p>
-    <p class="profile-value"></p>
-  </div>
-  <div>
-    <p class="profile-label">User Object</p>
-    <pre class="profile-value"></pre>
-  </div>
-</article>
+<h1 class="title">User Profile</h1>
+<section class="content">
+  <article class="card">
+    <h2 class="profile-title"> <span class="go-back" onclick="window.history.back()">🡨</span>User Profile</h2>
+    <div>
+      <p class="profile-label">ID</p>
+      <p class="profile-value">1</p>
+    </div>
+    <div>
+      <p class="profile-label">Email/Username</p>
+      <p class="profile-value">anemail@email@provider.com</p>
+    </div>
+    <div>
+      <p class="profile-label">Role</p>
+      <p class="profile-value">user-role</p>
+    </div>
+    <div>
+      <p class="profile-label">User Object</p>
+      <pre class="profile-value">
+  {
+    email: 'anemail@email@provider.com', 
+    password: hashed-password, 
+    role: 'user-role'
+  }
+      </pre>
+    </div>
+  </article>
+</section>
 
 <%- include('./layouts/footer.ejs') %>

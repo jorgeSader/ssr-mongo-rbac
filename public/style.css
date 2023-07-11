@@ -18,6 +18,7 @@ body {
   margin: auto;
   font-weight: 500;
   color: #323232;
+  min-height: 100dvh;
 }
 
 main {
@@ -100,6 +101,7 @@ padding: 1rem 1rem 0.5rem;
 .form-title {
   font-size: 1.5rem;
   color: purple;
+  margin-bottom: 1rem;
 }
 
 .form-item {
@@ -110,6 +112,7 @@ padding: 1rem 1rem 0.5rem;
 .form-label {
   display: block;
   color: rgb(32, 32, 32);
+  margin-bottom: .25rem;
 }
 
 .form-input,
@@ -118,6 +121,7 @@ padding: 1rem 1rem 0.5rem;
   width: 100%;
   font-family: inherit;
   padding: 0 0.5rem;
+  border-radius: .25em;
 }
 
 .form-input:focus,
@@ -125,8 +129,6 @@ padding: 1rem 1rem 0.5rem;
   /* outline: none; */
   outline: 1px solid purple;
 }
-
-
 
 .form-button {
   border: none;
@@ -146,4 +148,31 @@ padding: 1rem 1rem 0.5rem;
   color: #ffffff;
   box-shadow: 2px 0px 2px rgba(0, 0, 0, .26);
   cursor: pointer;
+}
+
+/* Profile */
+.profile-title {
+  font-size: 1.5rem;
+}
+
+.profile-label {
+  display: block;
+  font-weight: 600;
+  margin: 1rem 0.5rem 0;
+  color: purple;
+}
+
+.profile-value {
+  margin: 0.5rem 0.5rem;
+}
+
+.go-back {
+  margin-right: 0.5rem;
+  color: purple;
+}
+
+.go-back:hover,
+.go-back:active {
+  cursor: pointer;
+  color: rgb(165, 4, 165);
 }
