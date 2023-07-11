@@ -1,0 +1,149 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  background: #ffeeff;
+}
+
+body {
+  font-family: Montserrat;
+  max-width: 100rem;
+  margin: auto;
+  font-weight: 500;
+  color: #323232;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+}
+
+a {
+  all: unset;
+  color: purple;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+a:hover,
+a:active {
+  border-bottom: 2px solid purple;
+}
+
+
+li>a {
+  text-decoration: none;
+  color: white;
+  font-weight: 600;
+}
+
+li>a:hover {
+  border-bottom: 3px solid white;
+  cursor: pointer;
+}
+
+.navbar {
+  display: flex;
+  background-color: purple;
+  justify-content: space-between;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, .26);
+}
+
+.navbar-title {
+  font-size: 1.2rem;
+  color: white;
+  padding: .75rem 1rem 0.75rem;
+  /* padding: 1rem 1rem 0.5rem; */
+}
+
+padding: 1rem 1rem 0.5rem;
+
+.navbar-menu {
+  display: flex;
+  color: #ebebeb;
+}
+
+.navbar-menu_link {
+  display: inline-block;
+  padding: 1rem 1rem 0.25rem;
+}
+
+.title {
+  margin: 1em;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* forms */
+.card {
+  display: flex;
+  flex-direction: column;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, .26);
+  border-radius: 1rem;
+  padding: 2rem;
+  background-color: #fff;
+}
+
+.form {}
+
+.form-title {
+  font-size: 1.5rem;
+  color: purple;
+}
+
+.form-item {
+  padding: 0.5rem 0;
+  font-size: 1rem;
+}
+
+.form-label {
+  display: block;
+  color: rgb(32, 32, 32);
+}
+
+.form-input,
+.form-password {
+  line-height: 2rem;
+  width: 100%;
+  font-family: inherit;
+  padding: 0 0.5rem;
+}
+
+.form-input:focus,
+.form-password:focus {
+  /* outline: none; */
+  outline: 1px solid purple;
+}
+
+
+
+.form-button {
+  border: none;
+  background-color: purple;
+  color: #ffeeff;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, .26);
+  border-radius: .25em;
+  margin: 1em 0;
+  padding: 0.75em 1em;
+  font-weight: 600;
+  width: 100%;
+  font-size: 1.1rem;
+}
+
+.form-button:hover {
+  background-color: rgb(165, 4, 165);
+  color: #ffffff;
+  box-shadow: 2px 0px 2px rgba(0, 0, 0, .26);
+  cursor: pointer;
+}

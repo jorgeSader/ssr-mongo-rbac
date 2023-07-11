@@ -15,7 +15,6 @@ const DB_URI = process.env.DB_URI;
 
 const app = express();
 app.use(morgan('dev'))
-
 app.set('view engine', 'ejs');
 app.use(express.static('public'))
 

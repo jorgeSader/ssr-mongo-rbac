@@ -1,21 +1,26 @@
 <%- include('./layouts/header.ejs') %>
 
 <h1 class="title">Login</h1>
-<form action="/auth/login" method="post" class="form">
-  <div class="form-item">
-    <label class="form-lable" for="email">Email/Username</label>
-    <input class="form-input" type="email" name="email" id="email">
+<section class="content">
+  <div class="card">
+    <form action="/auth/login" method="post" class="form">
+      <h2 class="form-title">Login</h2>
+      <div class="form-item">
+        <label class="form-label" for="email">Email/Username</label>
+        <input class="form-input" type="email" name="email" id="email" placeholder="Email">
+      </div>
+      <div class="form-item">
+        <label class="form-label" for="password">Password</label>
+        <input class="form-password" type="password" name="password" id="password" placeholder="Password">
+      </div>
+      <div>
+        <button class="form-button" type="submit">Login</button>
+      </div>
+      </>
+      <div>
+        <p>Need an account? <span><a href="/auth/register">Register here</a>.</span></p>
+      </div>
   </div>
-  <div class="form-item">
-    <label class="form-label" for="password">Password</label>
-    <input class="form-passsword" type="password" name="password" id="password">
-  </div>
-  <div>
-    <button class="form-button" type="submit">Login</button>
-  </div>
-</form>
-<div>
-  <p>Need an account? <span><a href="/auth/register">Register here</a>.</span></p>
-</div>
+</section>
 
 <%- include('./layouts/footer.ejs') %>
