@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;500;600;700&family=Oswald:wght@400;500;600;700&display=swap');
 
 *,
 *::before,
@@ -13,8 +13,7 @@ html {
 }
 
 body {
-  font-family: Montserrat;
-  max-width: 100rem;
+  font-family: 'Fira Sans';
   margin: auto;
   font-weight: 500;
   color: #323232;
@@ -24,6 +23,8 @@ body {
 main {
   display: flex;
   flex-direction: column;
+  max-width: 120rem;
+  margin: auto;
 }
 
 a {
@@ -51,20 +52,24 @@ li>a:hover {
 }
 
 .navbar {
-  display: flex;
   background-color: purple;
-  justify-content: space-between;
   box-shadow: 2px 2px 2px rgba(0, 0, 0, .26);
+}
+
+.navbar-content {
+  display: flex;
+  justify-content: space-between;
+  max-width: 160rem;
+  margin: auto;
+  padding: 0 1rem 0 0.5rem;
 }
 
 .navbar-title {
   font-size: 1.2rem;
   color: white;
   padding: .75rem 1rem 0.75rem;
-  /* padding: 1rem 1rem 0.5rem; */
 }
 
-padding: 1rem 1rem 0.5rem;
 
 .navbar-menu {
   display: flex;
@@ -117,17 +122,19 @@ padding: 1rem 1rem 0.5rem;
 
 .form-input,
 .form-password {
-  line-height: 2rem;
+  line-height: 2.25rem;
   width: 100%;
   font-family: inherit;
   padding: 0 0.5rem;
-  border-radius: .25em;
+  border: none;
+  border-radius: .5em;
+  box-shadow: 0px 0px 8px inset rgba(128, 0, 128, .16);
 }
 
 .form-input:focus,
 .form-password:focus {
   /* outline: none; */
-  outline: 1px solid purple;
+  outline: 2px solid rgba(128, 0, 128, 0.6);
 }
 
 .form-button {
@@ -168,11 +175,16 @@ padding: 1rem 1rem 0.5rem;
 
 .go-back {
   margin-right: 0.5rem;
+  margin-left: -0.5rem;
+  padding: 0.5rem;
   color: purple;
+  border-radius: 50%;
 }
 
 .go-back:hover,
 .go-back:active {
   cursor: pointer;
   color: rgb(165, 4, 165);
+  background-color: #ffeeff;
+  box-shadow: 2px 2px 2px rgba(128, 0, 128, 0.16);
 }
