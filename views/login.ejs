@@ -1,7 +1,9 @@
-<%- include('./layouts/header.ejs') %>
+<%- include('./includes/header.ejs') %>
 
 <h1 class="title">Login</h1>
 <section class="content">
+  <%- include('./includes/flash-message') %>
+
   <div class="card">
     <form action="/auth/login" method="post" class="form">
       <h2 class="form-title">Login</h2>
@@ -23,4 +25,4 @@
   </div>
 </section>
 
-<%- include('./layouts/footer.ejs') %>
+<%- include('./includes/footer.ejs') %>

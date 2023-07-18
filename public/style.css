@@ -39,7 +39,6 @@ a:active {
   border-bottom: 2px solid purple;
 }
 
-
 li>a {
   text-decoration: none;
   color: white;
@@ -69,7 +68,6 @@ li>a:hover {
   color: white;
   padding: .75rem 1rem 0.75rem;
 }
-
 
 .navbar-menu {
   display: flex;
@@ -187,4 +185,42 @@ li>a:hover {
   color: rgb(165, 4, 165);
   background-color: #ffeeff;
   box-shadow: 2px 2px 2px rgba(128, 0, 128, 0.16);
+}
+
+.flash-message {}
+
+.flash-message__list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0.25em;
+}
+
+.warning,
+.info,
+.success,
+.error {
+  padding: 0.5em 1em;
+  border-radius: .25em;
+  margin: 0.125em;
+}
+
+.warning {
+  background-color: #ffe032;
+}
+
+.info {
+  background-color: purple;
+  color: #fff;
+}
+
+.success {
+  background-color: #28af2f;
+  color: #fff;
+}
+
+.error {
+  background-color: #c91818;
+  color: #fff;
 }

@@ -4,12 +4,15 @@ import morgan from 'morgan';
 import mongoose from 'mongoose';
 import env from 'dotenv';
 
-import connectFlash from 'connect-flash';
 import session from 'express-session';
+import connectFlash from 'connect-flash';
+import passport from 'passport';
 
 import homeRoutes from './routes/index.routes.js';
 import authRoutes from './routes/auth.routes.js';
 import userRoutes from './routes/user.routes.js';
+
+import './utils/passport.auth.js';
 
 env.config();
 
@@ -29,7 +32,7 @@ app.use(express.urlencoded({ extended: false }));
 
 // Init Session
 app.use(session({
-  secret: process.env.SESSION_SECRET,
+  secret: process.env.SESSION_SECRET!,
   resave: false,
   saveUninitialized: false,
   cookie: {
@@ -38,7 +41,16 @@ app.use(session({
   }
 }));
 
+// Initiate passport session for JS Authentication
+app.use(passport.initialize());
+app.use(passport.session());
+
+// Connect flash
 app.use(connectFlash());
+app.use((req, res, next) => {
+  res.locals.messages = req.flash();
+  next();
+});
 
 // Routes
 app.use('/', homeRoutes);

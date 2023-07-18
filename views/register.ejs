@@ -1,17 +1,21 @@
-<%- include('./layouts/header.ejs') %>
+<%- include('./includes/header.ejs') %>
 
 <h1 class="title">Register</h1>
 <section class="content">
+  <%- include('./includes/flash-message') %>
+
   <div class="card">
     <form action="/auth/register" method="post" class="form">
       <h2 class="form-title">Register</h2>
       <div class="form-item">
         <label class="form-label" for="email">Email/Username</label>
-        <input class="form-input" type="email" name="email" id="email" placeholder="Email">
+        <input class="form-input" type="email" name="email" id="email" placeholder="Email"
+          value="<%= locals.email ? email : ''  %>">
       </div>
       <div class="form-item">
         <label class="form-label" for="password">Password</label>
-        <input class="form-password" type="password" name="password" id="password" placeholder="Password">
+        <input class="form-password" type="password" name="password" id="password" placeholder="Password"
+          value="<%= locals.password ? password : ''  %>">
       </div>
       <div>
         <button class="form-button" type="submit">Sign Up!</button>
@@ -23,4 +27,4 @@
   </div>
 </section>
 
-<%- include('./layouts/footer.ejs') %>
+<%- include('./includes/footer.ejs') %>
