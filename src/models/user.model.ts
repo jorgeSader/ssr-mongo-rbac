@@ -4,34 +4,42 @@ import createHttpError from "http-errors";
 
 export interface IUser {
   id?: Types.ObjectId;
+  googleId?: string;
   email: string;
-  password: string;
+  password?: string;
+  firstName?: string;
+  lastName?: string;
+  imageUrl?: string;
 }
 
 export interface IUserMethods {
   isValidPassword (password: string): Promise<boolean>;
+}
 
+export interface IVirtuals {
+  domain (): string;
 }
 
 export type UserModel = Model<IUser, {}, IUserMethods>;
 
 
-const UserSchema = new Schema<IUser, UserModel, IUserMethods>({
+const UserSchema = new Schema<IUser, UserModel, IUserMethods, IVirtuals>({
   email: {
     type: String,
-    require: true,
+    required: true,
     lowercase: true,
     unique: true,
   },
-  password: {
-    type: String,
-    require: true,
-  }
+  password: String,
+  googleId: String,
+  imageUrl: String,
+  firstName: String,
+  lastName: String,
 });
 
 UserSchema.pre('save', async function (next) {
   try {
-    if (this.password && this.isNew) {
+    if (this.isNew && this.password) {
       const hashedPassword = await bcrypt.hash(this.password, 10);
       this.password = hashedPassword;
       next();
@@ -43,10 +51,18 @@ UserSchema.pre('save', async function (next) {
 
 UserSchema.methods.isValidPassword = async function (password: string): Promise<boolean> {
   try {
+    console.log("🚀 ~ Hello, Someone just called isValidPassword..."); //TODO: DELETE LINE
+
     return await bcrypt.compare(password, this.password);
   } catch (error) {
     throw createHttpError.InternalServerError(error.message);
   }
 };
 
-export const User = model('user', UserSchema);
+UserSchema.virtual('domain').get(function () {
+  return this.email.slice(this.email.indexOf('@') + 1);
+});
+
+const User = model('user', UserSchema);
+
+export { User };

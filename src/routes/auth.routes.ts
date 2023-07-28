@@ -5,21 +5,30 @@ import passport from "passport";
 
 const router = express.Router();
 
-// Login
+// Login page
 router.get('/login', async (req, res, next) => {
   res.render('login');
 });
+
+// Local Passport Login
 router.post('/login', passport.authenticate('local', {
-  successRedirect: "/user/profile",
-  failureRedirect: "/auth/login",
+  successRedirect: "/user/profile/",
+  failureRedirect: "/auth/login/",
   failureFlash: true
 })
 );
 
-// Logout
-router.get('/logout', async (req, res, next) => {
-  res.redirect('../');
+// Google Passport Login
+router.get('/google', passport.authenticate('google', {
+  scope: ['profile', 'email']
+}));
+
+// Google Passport Redirect
+router.get('/google/redirect', passport.authenticate('google'), (req, res) => {
+  res.send("You have reached Google's callback URI");
+  // res.redirect('/user/profile');
 });
+
 
 // Register
 router.get('/register', async (req, res, next) => {
@@ -38,7 +47,7 @@ router.get('/register', async (req, res, next) => {
 });
 
 router.post('/register', [
-  body('email').trim().isEmail().withMessage('Please enter a valid email.').normalizeEmail().toLowerCase(),
+  body('email').trim().isEmail().withMessage('Please enter a valid email.').toLowerCase(),
   body('password').trim().isStrongPassword({
     minLength: 8,
     minLowercase: 1,
@@ -76,5 +85,12 @@ router.post('/register', [
     }
 
   });
+
+// Logout
+router.get('/logout', async (req, res, next) => {
+  res.redirect('/');
+});
+
+
 
 export default router; 

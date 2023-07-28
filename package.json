@@ -12,8 +12,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@types/passport": "^1.0.12",
-    "@types/passport-local": "^1.0.35",
     "bcryptjs": "^2.4.3",
     "connect-flash": "^0.1.1",
     "dotenv": "^16.3.1",
@@ -25,6 +23,7 @@
     "mongoose": "^7.3.2",
     "morgan": "^1.10.0",
     "passport": "^0.6.0",
+    "passport-google-oauth20": "^2.0.0",
     "passport-local": "^1.0.0"
   },
   "devDependencies": {
@@ -37,6 +36,9 @@
     "@types/http-errors": "^2.0.1",
     "@types/mongoose": "^5.11.97",
     "@types/morgan": "^1.9.4",
+    "@types/passport": "^1.0.12",
+    "@types/passport-google-oauth20": "^2.0.11",
+    "@types/passport-local": "^1.0.35",
     "typescript": "^5.1.6"
   }
 }

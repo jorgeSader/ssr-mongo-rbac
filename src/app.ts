@@ -8,11 +8,14 @@ import session from 'express-session';
 import connectFlash from 'connect-flash';
 import passport from 'passport';
 
+// Import Passport Strategies
+import "../dist/auth/local-passport.auth.js";
+import "../dist/auth/google-passport.auth.js";
+
 import homeRoutes from './routes/index.routes.js';
 import authRoutes from './routes/auth.routes.js';
 import userRoutes from './routes/user.routes.js';
 
-import './utils/passport.auth.js';
 
 env.config();
 
@@ -38,6 +41,7 @@ app.use(session({
   cookie: {
     // secure: true, // TODO: comment in for production.
     httpOnly: true,
+    maxAge: 24 * 60 * 60 * 1000 // one day in milliseconds
   }
 }));
 
@@ -61,16 +65,16 @@ app.use((req, res, next) => {
   next(createHttpError.NotFound());
 });
 
-app.use((error, req, res, next) => {
-  error.status = error.status || 500;
-  res.status(error.status);
-  res.render('error_40x', { error });
-  // res.send(error);
-});
+// app.use((error, req, res, next) => {
+//   error.status = error.status || 500;
+//   res.status(error.status);
+//   res.render('error_40x', { error });
+//   res.send(error);
+// });
 
 await mongoose
   .connect(DB_URI!)
   .then(console.log('🛢️  Connected to database...')!)
   .catch((e) => console.log('Error connecting to DB: ', e));
 
-app.listen(PORT, () => console.log(`🚀 App running on port ${PORT}`));
+app.listen(PORT, () => console.log(`🚀 App running on port ${PORT}`));​

@@ -8,16 +8,15 @@
   box-sizing: border-box;
 }
 
-html {
-  background: #ffeeff;
-}
-
 body {
   font-family: 'Fira Sans';
   margin: auto;
   font-weight: 500;
+  background: #ffeeff;
   color: #323232;
   min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
 }
 
 main {
@@ -51,6 +50,8 @@ li>a:hover {
 }
 
 .navbar {
+  display: flex;
+  justify-content: center;
   background-color: purple;
   box-shadow: 2px 2px 2px rgba(0, 0, 0, .26);
 }
@@ -58,20 +59,24 @@ li>a:hover {
 .navbar-content {
   display: flex;
   justify-content: space-between;
+  align-items: baseline;
+  width: 100%;
   max-width: 160rem;
-  margin: auto;
   padding: 0 1rem 0 0.5rem;
 }
 
 .navbar-title {
   font-size: 1.2rem;
+  font-weight: 700;
   color: white;
   padding: .75rem 1rem 0.75rem;
 }
 
 .navbar-menu {
   display: flex;
+  align-items: center;
   color: #ebebeb;
+  flex-wrap: wrap;
 }
 
 .navbar-menu_link {
