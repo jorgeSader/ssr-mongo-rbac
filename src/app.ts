@@ -16,8 +16,6 @@ import homeRoutes from './routes/index.routes.js';
 import authRoutes from './routes/auth.routes.js';
 import userRoutes from './routes/user.routes.js';
 
-import { togglePasswordView } from "./dist/utils/password-show.js";
-
 env.config();
 
 // Get Variables
@@ -42,7 +40,7 @@ app.use(session({
   cookie: {
     // secure: true, // TODO: comment in for production.
     httpOnly: true,
-    maxAge: 15000 //24 * 60 * 60 * 1000 // one day in milliseconds
+    maxAge: 24 * 60 * 60 * 1000 // one day in milliseconds
   }
 }));
 
@@ -66,12 +64,12 @@ app.use((req, res, next) => {
   next(createHttpError.NotFound());
 });
 
-// app.use((error, req, res, next) => {
-//   error.status = error.status || 500;
-//   res.status(error.status);
-//   res.render('error_40x', { error });
-//   res.send(error);
-// });
+app.use((error, req, res, next) => {
+  error.status = error.status || 500;
+  res.status(error.status);
+  res.render('error_40x', { error });
+  res.send(error);
+});
 
 await mongoose
   .connect(DB_URI!)

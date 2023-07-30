@@ -25,7 +25,7 @@ passport.use(
     clientID: process.env.GOOGLE_CLIENT_ID!,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
   }, async (accessToken, refreshToken, profile, done) => {
-    console.log("🚀 ~ file: passport-google.auth.ts:15 ~ profile:", profile);
+    console.log("🚀 ~ file: passport-google.auth.ts:28 ~ profile:", profile);
     // Passport callback function
     try {
       // Check if email is already registered
