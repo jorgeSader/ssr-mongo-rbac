@@ -2,6 +2,17 @@ import passport from 'passport';
 import LocalStrategy from 'passport-local';
 import { User } from '../models/user.model.js';
 
+
+passport.serializeUser((user, done) => {
+  done(null, user.id);
+});
+
+passport.deserializeUser((id, done) => {
+  User.findById(id).then((user) => {
+    done(null, user);
+  });
+});
+
 passport.use(
   new LocalStrategy.Strategy(
     {
@@ -26,13 +37,4 @@ passport.use(
     }
   )
 );
-//
-// passport.serializeUser((user, done) => {
-//   done(null, user.id);
-// });
-// 
-// passport.deserializeUser((id, done) => {
-//   User.findById(id).then((user) => {
-//     done(null, user);
-//   });
-// });
+

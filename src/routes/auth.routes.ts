@@ -25,6 +25,8 @@ router.get('/google', passport.authenticate('google', {
 
 // Google Passport Redirect
 router.get('/google/redirect', passport.authenticate('google'), (req, res) => {
+  console.log("🚀 ~ file: auth.routes.ts:28 ~ router.get ~ req.user:", req.user);
+
   res.send("You have reached Google's callback URI");
   // res.redirect('/user/profile');
 });
@@ -70,12 +72,14 @@ router.post('/register', [
       const doesExist = await User.findOne({ email });
 
       if (doesExist) {
-        res.redirect('/auth/register');
+        req.flash('info', `${doesExist.email} is already registered. Please log in.`);
+        res.redirect('/auth/login');
         return;
       }
 
       const user = new User(req.body);
-      await user.save();
+      const newUser = await user.save();
+      console.log("🚀 ~ file: auth.routes.ts:81 ~ newUser:", newUser);
 
       req.flash('success', `${user.email} Registered successfully. You can now log in.`);
 

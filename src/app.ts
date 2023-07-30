@@ -9,13 +9,14 @@ import connectFlash from 'connect-flash';
 import passport from 'passport';
 
 // Import Passport Strategies
-import "../dist/auth/local-passport.auth.js";
-import "../dist/auth/google-passport.auth.js";
+import "../dist/auth/passport-local.auth.js";
+import "../dist/auth/passport-google.auth.js";
 
 import homeRoutes from './routes/index.routes.js';
 import authRoutes from './routes/auth.routes.js';
 import userRoutes from './routes/user.routes.js';
 
+import { togglePasswordView } from "./dist/utils/password-show.js";
 
 env.config();
 
@@ -41,7 +42,7 @@ app.use(session({
   cookie: {
     // secure: true, // TODO: comment in for production.
     httpOnly: true,
-    maxAge: 24 * 60 * 60 * 1000 // one day in milliseconds
+    maxAge: 15000 //24 * 60 * 60 * 1000 // one day in milliseconds
   }
 }));
 
