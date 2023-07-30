@@ -14,8 +14,12 @@
       </div>
       <div class="form-item">
         <label class="form-label" for="password">Password</label>
-        <input class="form-password" type="password" name="password" id="password" placeholder="Password"
-          value="<%= locals.password ? password : ''  %>">
+        <div class="password">
+          <input class="password-input" type="password" name="password" id="password" placeholder="Password"
+            value="<%= locals.password ? password : ''  %>">
+          <img src="../../hide-64.png" alt="Show password icon" onclick="togglePasswordView()" class="password-icon"
+            id="password-icon">
+        </div>
       </div>
       <div>
         <button class="form-button" type="submit">Sign Up!</button>

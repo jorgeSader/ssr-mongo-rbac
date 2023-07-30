@@ -16,12 +16,15 @@
       </div>
       <div class="form-item">
         <label class="form-label" for="password">Password</label>
-        <input class="form-password" type="password" name="password" id="password" placeholder="Password">
+        <div class="password">
+          <input class="password-input" type="password" name="password" id="password" placeholder="Password">
+          <img src="../../hide-64.png" alt="Show password icon" onclick="togglePasswordView()" class="password-icon"
+            id="password-icon">
+        </div>
       </div>
       <div>
         <button class="form-button" type="submit">Login</button>
       </div>
-      </>
       <div>
         <p>Need an account? <span><a href="/auth/register">Register here</a>.</span></p>
       </div>

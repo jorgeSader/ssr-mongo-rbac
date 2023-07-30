@@ -124,7 +124,7 @@ li>a:hover {
 }
 
 .form-input,
-.form-password {
+.password-input {
   line-height: 2.25rem;
   width: 100%;
   font-family: inherit;
@@ -134,8 +134,27 @@ li>a:hover {
   box-shadow: 0px 0px 8px inset rgba(128, 0, 128, .16);
 }
 
+.password {
+  display: inline-block;
+  position: relative;
+  width: 100%;
+}
+
+.form-password {
+  /* background: no-repeat url('./eye-64.png') right / 10%; */
+  /* background-position-x: 1em; */
+}
+
+.password-icon {
+  cursor: pointer;
+  position: absolute;
+  width: 1.5em;
+  top: 0.35em;
+  right: 0.5em;
+}
+
 .form-input:focus,
-.form-password:focus {
+.password-input:focus {
   /* outline: none; */
   outline: 2px solid rgba(128, 0, 128, 0.6);
 }
