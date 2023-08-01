@@ -101,6 +101,7 @@ li>a:hover {
   box-shadow: 2px 2px 2px rgba(0, 0, 0, .26);
   border-radius: 1rem;
   padding: 2rem;
+  margin: 0 2rem;
   background-color: #fff;
 }
 
@@ -193,6 +194,7 @@ li>a:hover {
 
 .profile-value {
   margin: 0.5rem 0.5rem;
+  font-weight: 400;
 }
 
 .go-back {

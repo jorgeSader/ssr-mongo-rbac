@@ -16,6 +16,8 @@ import homeRoutes from './routes/index.routes.js';
 import authRoutes from './routes/auth.routes.js';
 import userRoutes from './routes/user.routes.js';
 
+import { isLoggedIn } from './auth/middleware.auth.js';
+
 env.config();
 
 // Get Variables
@@ -48,6 +50,12 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
+// add share user with all routes via middleware 
+app.use((req, res, next) => {
+  res.locals.user = req.user;
+  next();
+});
+
 // Connect flash
 app.use(connectFlash());
 app.use((req, res, next) => {
@@ -58,7 +66,7 @@ app.use((req, res, next) => {
 // Routes
 app.use('/', homeRoutes);
 app.use('/auth', authRoutes);
-app.use('/user', userRoutes);
+app.use('/user', isLoggedIn, userRoutes);
 
 app.use((req, res, next) => {
   next(createHttpError.NotFound());
@@ -68,7 +76,6 @@ app.use((error, req, res, next) => {
   error.status = error.status || 500;
   res.status(error.status);
   res.render('error_40x', { error });
-  res.send(error);
 });
 
 await mongoose

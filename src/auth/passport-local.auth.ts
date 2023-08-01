@@ -1,5 +1,5 @@
 import passport from 'passport';
-import LocalStrategy from 'passport-local';
+import { Strategy as LocalStrategy } from 'passport-local';
 import { User } from '../models/user.model.js';
 
 
@@ -14,7 +14,7 @@ passport.deserializeUser((id, done) => {
 });
 
 passport.use(
-  new LocalStrategy.Strategy(
+  new LocalStrategy(
     {
       usernameField: 'email',
       passwordField: 'password'

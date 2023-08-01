@@ -2,11 +2,12 @@ import express from "express";
 import { User } from "../models/user.model.js";
 import { body, validationResult } from "express-validator";
 import passport from "passport";
+import { isLoggedOut } from "../auth/middleware.auth.js";
 
 const router = express.Router();
 
 // Login page
-router.get('/login', async (req, res, next) => {
+router.get('/login', isLoggedOut, async (req, res, next) => {
   res.render('login');
 });
 
@@ -25,15 +26,12 @@ router.get('/google', passport.authenticate('google', {
 
 // Google Passport Redirect
 router.get('/google/redirect', passport.authenticate('google'), (req, res) => {
-  console.log("🚀 ~ file: auth.routes.ts:28 ~ router.get ~ req.user:", req.user);
-
-  res.send("You have reached Google's callback URI");
-  // res.redirect('/user/profile');
+  // res.send(req.user);
+  res.redirect('/user/profile');
 });
 
-
 // Register
-router.get('/register', async (req, res, next) => {
+router.get('/register', isLoggedOut, async (req, res, next) => {
   // req.flash('error', 'some error ocurred'); // test flash message
   // req.flash('error', 'another error ocurred'); // test flash message
   // req.flash('warning', 'some warning here'); // test flash message
@@ -58,7 +56,7 @@ router.post('/register', [
     minSymbols: 1,
   }).withMessage('Please enter a strong password. It should be at least 8 character long and contain at least 1 lowercase, 1 uppercase, 1 number, and 1 symbol.')
 ],
-  async (req, res, next) => {
+  async (req: any, res: any, next: any) => {
     try {
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
@@ -91,10 +89,12 @@ router.post('/register', [
   });
 
 // Logout
-router.get('/logout', async (req, res, next) => {
-  res.redirect('/');
+router.post('/logout', function (req, res, next) {
+  req.logout(function (err) {
+    if (err) { return next(err); }
+    res.redirect('/');
+  });
 });
-
 
 
 export default router; 

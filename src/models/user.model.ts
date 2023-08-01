@@ -51,8 +51,6 @@ UserSchema.pre('save', async function (next) {
 
 UserSchema.methods.isValidPassword = async function (password: string): Promise<boolean> {
   try {
-    console.log("🚀 ~ Hello, Someone just called isValidPassword..."); //TODO: DELETE LINE
-
     return await bcrypt.compare(password, this.password);
   } catch (error) {
     throw createHttpError.InternalServerError(error.message);
