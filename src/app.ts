@@ -72,7 +72,7 @@ app.use((req, res, next) => {
   next(createHttpError.NotFound());
 });
 
-app.use((error, req, res, next) => {
+app.use((error: any, req: any, res: any, next: any) => {
   error.status = error.status || 500;
   res.status(error.status);
   res.render('error_40x', { error });
