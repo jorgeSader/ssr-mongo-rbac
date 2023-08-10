@@ -2,7 +2,7 @@ import express from "express";
 import { User } from "../models/user.model.js";
 import { body, validationResult } from "express-validator";
 import passport from "passport";
-import { isLoggedOut } from "../auth/middleware.auth.js";
+import { isLoggedIn, isLoggedOut } from "../auth/middleware.auth.js";
 
 const router = express.Router();
 
@@ -89,7 +89,7 @@ router.post('/register', [
   });
 
 // Logout
-router.post('/logout', function (req, res, next) {
+router.use('/logout', isLoggedIn, function (req, res, next) {
   req.logout(function (err) {
     if (err) { return next(err); }
     res.redirect('/');

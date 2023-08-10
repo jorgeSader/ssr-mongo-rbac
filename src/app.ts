@@ -7,6 +7,7 @@ import env from 'dotenv';
 import session from 'express-session';
 import connectFlash from 'connect-flash';
 import passport from 'passport';
+import { default as connectMongo } from 'connect-mongodb-session';
 
 // Import Passport Strategies
 import "../dist/auth/passport-local.auth.js";
@@ -29,6 +30,14 @@ const app = express();
 app.use(morgan('dev'));
 app.set('view engine', 'ejs');
 
+// Initialize store
+const MongoStore = connectMongo(session);
+const store = new MongoStore({
+  uri: DB_URI!,
+  collection: 'sessions'
+});
+store.on('error', (error) => { console.error(error); });
+
 // Middleware
 app.use(express.static('public'));
 app.use(express.json());
@@ -43,7 +52,8 @@ app.use(session({
     // secure: true, // TODO: comment in for production.
     httpOnly: true,
     maxAge: 24 * 60 * 60 * 1000 // one day in milliseconds
-  }
+  },
+  store: store
 }));
 
 // Initiate passport session for JS Authentication
