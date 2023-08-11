@@ -60,7 +60,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-// add share user with all routes via middleware 
+// Share user with all routes via middleware 
 app.use((req, res, next) => {
   res.locals.user = req.user;
   next();
