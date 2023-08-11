@@ -2,19 +2,20 @@ import express from "express";
 import { User } from "../models/user.model.js";
 import { body, validationResult } from "express-validator";
 import passport from "passport";
-import { isLoggedIn, isLoggedOut } from "../auth/middleware.auth.js";
+import { ensureLoggedIn, ensureLoggedOut } from 'connect-ensure-login';
 
 const router = express.Router();
 
 // Login page
-router.get('/login', isLoggedOut, async (req, res, next) => {
+router.get('/login', ensureLoggedOut({ redirectTo: '/user/profile' }), async (req, res, next) => {
   res.render('login');
 });
 
 // Local Passport Login
 router.post('/login', passport.authenticate('local', {
-  successRedirect: "/user/profile/",
-  failureRedirect: "/auth/login/",
+  // successRedirect: "/user/profile/",
+  successReturnToOrRedirect: "/",
+  failureRedirect: "/auth/login",
   failureFlash: true
 })
 );
@@ -27,11 +28,11 @@ router.get('/google', passport.authenticate('google', {
 // Google Passport Redirect
 router.get('/google/redirect', passport.authenticate('google'), (req, res) => {
   // res.send(req.user);
-  res.redirect('/user/profile');
+  res.redirect('/');
 });
 
 // Register
-router.get('/register', isLoggedOut, async (req, res, next) => {
+router.get('/register', ensureLoggedOut({ redirectTo: '/user/profile' }), async (req, res, next) => {
   // req.flash('error', 'some error ocurred'); // test flash message
   // req.flash('error', 'another error ocurred'); // test flash message
   // req.flash('warning', 'some warning here'); // test flash message
@@ -89,7 +90,7 @@ router.post('/register', [
   });
 
 // Logout
-router.use('/logout', isLoggedIn, function (req, res, next) {
+router.use('/logout', ensureLoggedIn({ redirectTo: '/user/profile' }), function (req, res, next) {
   req.logout(function (err) {
     if (err) { return next(err); }
     res.redirect('/');

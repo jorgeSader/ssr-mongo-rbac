@@ -8,6 +8,7 @@ import session from 'express-session';
 import connectFlash from 'connect-flash';
 import passport from 'passport';
 import { default as connectMongo } from 'connect-mongodb-session';
+import { ensureLoggedIn } from 'connect-ensure-login';
 
 // Import Passport Strategies
 import "../dist/auth/passport-local.auth.js";
@@ -16,8 +17,7 @@ import "../dist/auth/passport-google.auth.js";
 import homeRoutes from './routes/index.routes.js';
 import authRoutes from './routes/auth.routes.js';
 import userRoutes from './routes/user.routes.js';
-
-import { isLoggedIn } from './auth/middleware.auth.js';
+import adminRoutes from './routes/admin.routes.js';
 
 env.config();
 
@@ -76,7 +76,8 @@ app.use((req, res, next) => {
 // Routes
 app.use('/', homeRoutes);
 app.use('/auth', authRoutes);
-app.use('/user', isLoggedIn, userRoutes);
+app.use('/user', ensureLoggedIn({ redirectTo: '/auth/login' }), userRoutes);
+app.use('/admin', ensureLoggedIn({ redirectTo: '/auth/login' }), adminRoutes);
 
 app.use((req, res, next) => {
   next(createHttpError.NotFound());
