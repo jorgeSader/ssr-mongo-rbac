@@ -1,15 +1,22 @@
 <%- include('./includes/header.ejs') %>
 
 <h1 class="title">Login</h1>
+<%- include('./includes/flash-message') %>
 <section class="content">
-  <%- include('./includes/flash-message') %>
 
   <div class="card">
-    <section class="o-auth-buttons">
-      <a type="button" href="/auth/google">Google</a>
+    <section class="o-auth">
+      <a type="button" href="/auth/google" class="o-auth-button">Log In with Google</a>
+      <a type="button" href="/auth/google" class="o-auth-button">Log In with Facebook</a>
+      <a type="button" href="/auth/google" class="o-auth-button">Log In with Instagram</a>
+      <a type="button" href="/auth/google" class="o-auth-button">Log In with Github</a>
     </section>
+
+  </div>
+  <h2 class="divider">OR</h2>
+  <div class="card">
     <form action="/auth/login" method="post" class="form">
-      <h2 class="form-title">Login</h2>
+      <h2 class="form-title">Log In with Email</h2>
       <div class="form-item">
         <label class="form-label" for="email">Email/Username</label>
         <input class="form-input" type="email" name="email" id="email" placeholder="Email">
