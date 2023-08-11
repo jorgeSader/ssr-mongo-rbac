@@ -39,7 +39,6 @@ a:active {
 }
 
 li>a {
-  text-decoration: none;
   color: white;
   font-weight: 600;
 }
@@ -70,6 +69,10 @@ li>a:hover {
   font-weight: 700;
   color: white;
   padding: .75rem 1rem 0.75rem;
+}
+
+.navbar-title:hover {
+  border-bottom: 2px transparent;
 }
 
 .navbar-menu {
