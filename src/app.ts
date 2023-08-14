@@ -18,6 +18,7 @@ import homeRoutes from './routes/index.routes.js';
 import authRoutes from './routes/auth.routes.js';
 import userRoutes from './routes/user.routes.js';
 import adminRoutes from './routes/admin.routes.js';
+import profileRoutes from './routes/profile.routes.js';
 
 env.config();
 
@@ -76,8 +77,9 @@ app.use((req, res, next) => {
 // Routes
 app.use('/', homeRoutes);
 app.use('/auth', authRoutes);
-app.use('/user', ensureLoggedIn({ redirectTo: '/auth/login' }), userRoutes);
 app.use('/admin', ensureLoggedIn({ redirectTo: '/auth/login' }), adminRoutes);
+app.use('/profile', ensureLoggedIn({ redirectTo: '/auth/login' }), profileRoutes);
+app.use('/users', ensureLoggedIn({ redirectTo: '/auth/login' }), userRoutes);
 
 app.use((req, res, next) => {
   next(createHttpError.NotFound());

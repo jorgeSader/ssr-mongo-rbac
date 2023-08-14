@@ -1,24 +1,26 @@
 import express from "express";
-import { User } from "../models/user.model.js";
-import { body, validationResult } from "express-validator";
 import passport from "passport";
 import { ensureLoggedIn, ensureLoggedOut } from 'connect-ensure-login';
+import { getAuthLogin, getAuthRegister, postAuthRegister, useAuthLogout } from "../controllers/auth.controllers.js";
+import { registerValidator } from "../utils/validators.js";
 
 const router = express.Router();
 
 // Login page
-router.get('/login', ensureLoggedOut({ redirectTo: '/user/profile' }), async (req, res, next) => {
-  res.render('login');
-});
+router.get('/login', ensureLoggedOut({ redirectTo: '/profile' }), getAuthLogin);
+
+//==================// Local Passport Strategy //==================//
 
 // Local Passport Login
 router.post('/login', passport.authenticate('local', {
-  // successRedirect: "/user/profile/",
+  // successRedirect: "/users/profile/",
   successReturnToOrRedirect: "/",
   failureRedirect: "/auth/login",
   failureFlash: true
 })
 );
+
+//==================// Google Passport Strategy //==================//
 
 // Google Passport Login
 router.get('/google', passport.authenticate('google', {
@@ -27,75 +29,31 @@ router.get('/google', passport.authenticate('google', {
 
 // Google Passport Redirect
 router.get('/google/redirect', passport.authenticate('google'), (req, res) => {
-  // res.send(req.user);
   res.redirect('/');
 });
 
-// Register
-router.get('/register', ensureLoggedOut({ redirectTo: '/user/profile' }), async (req, res, next) => {
-  // req.flash('error', 'some error ocurred'); // test flash message
-  // req.flash('error', 'another error ocurred'); // test flash message
-  // req.flash('warning', 'some warning here'); // test flash message
-  // req.flash('success', 'some success message here'); // test flash message
-  // req.flash('info', 'some info message here'); // test flash message
+//==================// Instagram Passport Strategy //==================//
 
-  // const messages = req.flash(); // test flash message on this page
-  // res.render('register', {messages}); // test flash message on this page
+//TODO: Add passport login strategy for Instagram
 
-  // res.redirect('/auth/login'); // test flash message on redirect
 
-  res.render('register'); // comment out for testing
-});
+//==================// GitHub Passport Strategy //==================//
 
-router.post('/register', [
-  body('email').trim().isEmail().withMessage('Please enter a valid email.').toLowerCase(),
-  body('password').trim().isStrongPassword({
-    minLength: 8,
-    minLowercase: 1,
-    minUppercase: 1,
-    minNumbers: 1,
-    minSymbols: 1,
-  }).withMessage('Please enter a strong password. It should be at least 8 character long and contain at least 1 lowercase, 1 uppercase, 1 number, and 1 symbol.')
-],
-  async (req: any, res: any, next: any) => {
-    try {
-      const errors = validationResult(req);
-      if (!errors.isEmpty()) {
-        errors.array().forEach(error => {
-          req.flash('error', error.msg);
-        });
-        res.render('register', { email: req.body.email, password: req.body.password, messages: req.flash() });
-      }
+//TODO: Add passport login strategy for GitHub
 
-      const { email } = req.body;
-      const doesExist = await User.findOne({ email });
 
-      if (doesExist) {
-        req.flash('info', `${doesExist.email} is already registered. Please log in.`);
-        res.redirect('/auth/login');
-        return;
-      }
+//===================================================================//
 
-      const user = new User(req.body);
-      const newUser = await user.save();
-      console.log("🚀 ~ file: auth.routes.ts:81 ~ newUser:", newUser);
 
-      req.flash('success', `${user.email} Registered successfully. You can now log in.`);
 
-      res.redirect('/auth/login');
-    } catch (error) {
-      next(error);
-    }
+// Register Page
+router.get('/register', ensureLoggedOut({ redirectTo: '/profile' }), getAuthRegister);
 
-  });
+// Registration request
+router.post('/register', registerValidator, postAuthRegister);
 
 // Logout
-router.use('/logout', ensureLoggedIn({ redirectTo: '/user/profile' }), function (req, res, next) {
-  req.logout(function (err) {
-    if (err) { return next(err); }
-    res.redirect('/');
-  });
-});
+router.use('/logout', ensureLoggedIn({ redirectTo: '/profile' }), useAuthLogout);
 
 
 export default router; 
