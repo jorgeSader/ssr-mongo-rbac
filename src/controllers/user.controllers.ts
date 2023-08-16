@@ -3,7 +3,7 @@ import User from "../models/user.model.js";
 
 export const getUserList = async (req: Request, res: Response, next: NextFunction) => {
   const userList = await User.find();
-  return res.status(211).send(userList);
+  return res.status(200).send(userList);
 };
 
 export const getUser = async (req: Request, res: Response, next: NextFunction) => {

@@ -1,13 +1,15 @@
 import { RequestHandler } from 'express';
 
-export function authRole (role: string): RequestHandler {
+export function ensureRole (roles: string[]): RequestHandler {
   return async (req, res, next) => {
     try {
-      if (req.user!.role !== role) {
-        res.status(401);
-        return req.flash('error', "Sorry, you don't have enough permissions to access this page.");
+      if (roles.includes(req.user!.role)) {
+        return next();
       }
-      next();
+
+      req.flash('error', "Sorry, you don't have enough permissions to access that page.");
+      res.redirect('/');
+
     } catch (error) {
       next(error);
     }

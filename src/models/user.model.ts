@@ -4,6 +4,8 @@ import createHttpError from "http-errors";
 import env from 'dotenv';
 import { roles } from "../utils/constants.js";
 
+import Account from "./account.model.js";
+
 env.config();
 
 export interface IUser {
@@ -14,8 +16,9 @@ export interface IUser {
   firstName?: string;
   lastName?: string;
   imageUrl?: string;
+  accountId: Types.ObjectId;
   role: string;
-  projectIds: [string];
+  projectIds: Types.ObjectId[];
 }
 
 export interface IUserMethods {
@@ -41,6 +44,10 @@ const userSchema = new Schema<IUser, UserModel, IUserMethods, IVirtuals>({
   imageUrl: String,
   firstName: String,
   lastName: String,
+  accountId: {
+    type: Schema.Types.ObjectId,
+    ref: 'Account'
+  },
   role: {
     type: String,
     enum: [
@@ -64,6 +71,14 @@ userSchema.pre('save', async function (next) {
       if (this.password) {
         const hashedPassword = await bcrypt.hash(this.password, 10);
         this.password = hashedPassword;
+      }
+      if (!this.accountId) {
+        const account = await new Account({
+          name: 'ACME,Inc.' // TODO: Make name input dynamic.
+        });
+        this.accountId = account.id;
+        account.save();
+        this.role = roles.admin;
       }
       if (this.email.toLowerCase() === process.env.SUPER_ADMIN_EMAIL?.toLowerCase()) {
         this.role = roles.superAdmin;

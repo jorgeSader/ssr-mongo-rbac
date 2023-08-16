@@ -4,12 +4,10 @@ import createHttpError from "http-errors";
 export interface IAccount {
   id?: Types.ObjectId;
   name?: string;
-  userIds: [string];
 }
 
 const accountSchema = new Schema<IAccount>({
   name: String,
-
 });
 
 // accountSchema.pre('save', async function (next) {
