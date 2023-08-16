@@ -15,6 +15,7 @@ export interface IUser {
   lastName?: string;
   imageUrl?: string;
   role: string;
+  projectIds: [string];
 }
 
 export interface IUserMethods {
@@ -28,7 +29,7 @@ export interface IVirtuals {
 export type UserModel = Model<IUser, {}, IUserMethods>;
 
 
-const UserSchema = new Schema<IUser, UserModel, IUserMethods, IVirtuals>({
+const userSchema = new Schema<IUser, UserModel, IUserMethods, IVirtuals>({
   email: {
     type: String,
     required: true,
@@ -50,10 +51,14 @@ const UserSchema = new Schema<IUser, UserModel, IUserMethods, IVirtuals>({
       roles.vendor
     ],
     default: roles.employee
-  }
+  },
+  projectIds: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Project'
+  }],
 });
 
-UserSchema.pre('save', async function (next) {
+userSchema.pre('save', async function (next) {
   try {
     if (this.isNew) {
       if (this.password) {
@@ -70,7 +75,7 @@ UserSchema.pre('save', async function (next) {
   }
 });
 
-UserSchema.methods.isValidPassword = async function (password: string): Promise<boolean> {
+userSchema.methods.isValidPassword = async function (password: string): Promise<boolean> {
   try {
     return await bcrypt.compare(password, this.password);
   } catch (error) {
@@ -79,10 +84,8 @@ UserSchema.methods.isValidPassword = async function (password: string): Promise<
 };
 // mongoose "virtuals" allow us to query "computed" info without storing it. 
 // In this case we are using it to retrieve the domain of the user(everything after the "@" on their email).
-UserSchema.virtual('domain').get(function () {
+userSchema.virtual('domain').get(function () {
   return this.email.slice(this.email.indexOf('@') + 1);
 });
 
-const User = model('user', UserSchema);
-
-export { User };
+export default model('User', userSchema);

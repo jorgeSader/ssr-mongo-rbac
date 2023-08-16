@@ -1,7 +1,7 @@
 import passport from "passport";
 import { Strategy as GoogleStrategy } from "passport-google-oauth20";
 import env from "dotenv";
-import { User } from "../models/user.model.js";
+import User from "../models/user.model.js";
 
 env.config();
 
@@ -24,7 +24,6 @@ passport.use(
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
     },
     async (accessToken, refreshToken, profile, done) => {
-      console.log("🚀 ~ file: passport-google.auth.ts:28 ~ profile:", profile); // TODO: delete comment
       // Passport callback function
       try {
         // Check if email is already registered
@@ -33,7 +32,6 @@ passport.use(
           // if email has already been registered check for a googleId.
           if (currentUser.googleId) {
             // If user has googleID, return user
-            console.log("🚀 ~ file: passport-google.auth.ts:26 ~ currentUser:", currentUser); // TODO: delete comment
             done(null, currentUser);
           } else {
             // if there is no googleId, update user with google info, save, and return updated user
@@ -43,7 +41,6 @@ passport.use(
             currentUser.imageUrl = currentUser.imageUrl || profile.photos![0].value || '../../public/avatar-1577909.svg';
 
             const updatedUser = await currentUser.save();
-            console.log("🚀 ~ file: passport-google.auth.ts:34 ~ updatedUser:", updatedUser); // TODO: delete comment
             done(null, updatedUser);
           }
           // if no user exists with that email, create, save, and return new user
@@ -57,7 +54,6 @@ passport.use(
           });
 
           const newUser = await user.save();
-          console.log("🚀 ~ file: passport-google.auth.ts:46 ~ newUser:", newUser); // TODO: delete comment
           done(null, newUser);
         }
       } catch (error) {

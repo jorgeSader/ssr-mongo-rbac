@@ -1,6 +1,6 @@
 import { validationResult } from "express-validator";
 
-import { User } from "../models/user.model.js";
+import User from "../models/user.model.js";
 
 
 // GET auth/login - Render login page
