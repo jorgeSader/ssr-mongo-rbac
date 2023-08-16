@@ -3,8 +3,6 @@ import User from "../models/user.model.js";
 
 export const getUserList = async (req: Request, res: Response, next: NextFunction) => {
   const userList = await User.find();
-  console.log("🚀 ~ file: user.controllers.ts:5 ~ getUserList ~ userList:", userList);
-
   return res.status(211).send(userList);
 };
 
