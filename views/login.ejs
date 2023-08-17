@@ -2,16 +2,14 @@
 
 <h1 class="title">Welcome, How would you like to log in today?</h1>
 
-<%- include('./includes/flash-message') %>
-
 <section class="content">
 
   <div class="card">
     <section class="o-auth">
-      <a type="button" href="/auth/google" class="o-auth-button">Log In with Google</a>
-      <a type="button" href="/auth/google" class="o-auth-button">Log In with Facebook</a>
-      <a type="button" href="/auth/google" class="o-auth-button">Log In with Instagram</a>
-      <a type="button" href="/auth/google" class="o-auth-button">Log In with Github</a>
+      <a type="button" href="/auth/google" class="button--o-auth">Log In with Google</a>
+      <a type="button" href="/auth/google" class="button--o-auth">Log In with Facebook</a>
+      <a type="button" href="/auth/google" class="button--o-auth">Log In with Instagram</a>
+      <a type="button" href="/auth/google" class="button--o-auth">Log In with Github</a>
     </section>
   </div>
   <h2 class="divider">OR</h2>
@@ -31,7 +29,7 @@
         </div>
       </div>
       <div>
-        <button class="form-button" type="submit">Login</button>
+        <button class="button button--form" type="submit">Login</button>
       </div>
       <div>
         <p>Need an account? <span><a href="/auth/register">Register here</a>.</span></p>

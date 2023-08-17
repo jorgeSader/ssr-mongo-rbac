@@ -117,7 +117,7 @@ li>a:hover {
   flex-direction: column;
 }
 
-.o-auth-button {
+.button--o-auth {
   padding: 1em 2em;
   background: purple;
   color: white;
@@ -126,7 +126,7 @@ li>a:hover {
   box-shadow: 2px 2px 2px rgba(0, 0, 0, .26);
 }
 
-.o-auth-button:hover {
+.button--o-auth:hover {
   text-decoration: none;
   border: none;
   background-color: rgb(165, 4, 165);
@@ -188,12 +188,26 @@ li>a:hover {
   outline: 2px solid rgba(128, 0, 128, 0.6);
 }
 
-.form-button {
+.button {
+  font-family: inherit;
   border: none;
   background-color: purple;
-  color: #ffeeff;
+  color: #fff;
   box-shadow: 2px 2px 2px rgba(0, 0, 0, .26);
   border-radius: .25em;
+  font-weight: 600;
+  padding: 0.5em 1em;
+  margin: 0.5rem 0;
+}
+
+.button:hover,
+.button:active {
+  background-color: rgb(165, 4, 165);
+  box-shadow: 2px 0px 2px rgba(0, 0, 0, .26);
+  cursor: pointer;
+}
+
+.button--form {
   margin: 1em 0;
   padding: 0.75em 1em;
   font-weight: 600;
@@ -201,11 +215,15 @@ li>a:hover {
   font-size: 1.1rem;
 }
 
-.form-button:hover {
-  background-color: rgb(165, 4, 165);
-  color: #ffffff;
-  box-shadow: 2px 0px 2px rgba(0, 0, 0, .26);
-  cursor: pointer;
+.button--inline {
+  padding: .25rem 1rem;
+  font-size: inherit;
+  margin: 0.5rem 0 0.5rem 2rem;
+  font-weight: 500;
+}
+
+.button--inline:disabled {
+  background-color: #323232;
 }
 
 /* Profile */
@@ -242,10 +260,16 @@ li>a:hover {
   box-shadow: 2px 2px 2px rgba(128, 0, 128, 0.16);
 }
 
+.permissions-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
 .table {
   border-collapse: collapse;
   border-spacing: 0;
-  border-bottom: 8px solid purple;
+  border-bottom: 2px solid purple;
   box-shadow: 0px -1px 4px rgba(0, 0, 0, .26);
 }
 
@@ -281,21 +305,9 @@ li>a:hover {
   min-width: fit-content;
 }
 
-.inline-button {
-  font-family: inherit;
-  padding: .25rem 1rem;
-  font-size: inherit;
-  margin-left: 2rem;
-  font-weight: 500;
-}
-
-.inline-button:disabled {
-  background-color: #323232;
-}
-
 .flash-message {}
 
-.flash-message__list {
+.flash-message--list {
   list-style: none;
   display: flex;
   flex-direction: column;

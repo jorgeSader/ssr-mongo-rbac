@@ -45,7 +45,7 @@ export const postAuthRegister = async (req: any, res: any, next: any) => {
 
     const user = new User(req.body);
     const newUser = await user.save();
-    req.flash('success', `${user.email} Registered successfully. You can now log in.`);
+    req.flash('success', `${newUser.email} Registered successfully. You can now log in.`);
 
     res.redirect('/auth/login');
   } catch (error) {

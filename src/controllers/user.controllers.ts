@@ -1,11 +1,22 @@
 import { Request, Response, NextFunction } from "express";
-import User from "../models/user.model.js";
+import User, { IUser } from "../models/user.model.js";
 import mongoose from "mongoose";
 import { roles } from "../utils/constants.js";
 
 export const getUserList = async (req: Request, res: Response, next: NextFunction) => {
-  const userList = await User.find();
-  return res.render('permissions', { userList });
+  const currentUser = req.user;
+  if (!currentUser) {
+    req.flash('error', 'No user found! Please log in.');
+    return res.redirect('/auth/login');
+  }
+
+  let userList: IUser[] = [];
+  if (currentUser.role === 'SUPER_ADMIN') {
+    userList = await User.find();
+  } else {
+    userList = await User.find({ accountId: currentUser.accountId });
+  }
+  return res.render('permissions', { userList, currentUser });
 };
 
 export const getCurrentUser = async (req: Request, res: Response, next: NextFunction) => {
@@ -53,7 +64,7 @@ export const updateRole = async (req: Request, res: Response, next: NextFunction
 
     // Ensure that Admins can't remove themselves as Admins to ensure that there is always at least one admin
     if (req.user!.id === userId) {
-      req.flash('error', 'Admins cannot remove themselves from Admin role. Please ask another Admin to do it for you.');
+      req.flash('warning', 'Admins cannot remove themselves from Admin role. Please ask another Admin to do it for you.');
       return res.redirect('back');
     }
 

@@ -1,9 +1,10 @@
 <%- include('./includes/header.ejs') %>
 
-<%- include('./includes/flash-message') %>
-
 <section class="card card-content">
-  <h1 class="title">Manage Users</h1>
+  <header class="permissions-header">
+    <h1 class="title">Manage Users</h1>
+    <button type="button" class="button">+ Add User</button>
+  </header>
 
   <table class="table">
     <thead class="table-header">
@@ -13,6 +14,7 @@
     </thead>
     <tbody>
       <% userList.forEach(user => { %>
+
       <tr class="table-row">
         <th scope="row" class="table-data">
           <a href="/admin/users/<%= user.id %>"> <%= user.id %> </a>
@@ -24,20 +26,25 @@
           <form action="/admin/update-role" method="post" class="form-update-role">
             <input type="hidden" name="userId" value="<%= user.id %>">
             <select name="role" id="role" class="form-input pulldown-menu">
-              <option value="SUPER_ADMIN" <%= user.role === 'SUPER_ADMIN' ? 'selected' : '' %>>Super-Admin</option>
+              <% if (currentUser.role === 'SUPER_ADMIN') { %>
+              <option value="SUPER_ADMIN" <%= user.role === 'SUPER_ADMIN' ? 'selected' : '' %>>Super-Admin
+              </option>
+              <% } %>
               <option value="ADMIN" <%= user.role === 'ADMIN' ? 'selected' : '' %>>Admin</option>
               <option value="MANAGER" <%= user.role === 'MANAGER' ? 'selected' : '' %>>Manager</option>
               <option value="EMPLOYEE" <%= user.role === 'EMPLOYEE' ? 'selected' : '' %>>Employee</option>
               <option value="VENDOR" <%= user.role === 'VENDOR' ? 'selected' : '' %>>Vendor</option>
               <option value="CLIENT" <%= user.role === 'CLIENT' ? 'selected' : '' %>>Client</option>
             </select>
-            <input type="submit" value="update" class="form-button inline-button">
+            <input type="submit" value="update" class="button button--inline">
           </form>
         </td>
       </tr>
       <% }) %>
+
     </tbody>
   </table>
+  <button type="button" class="button button--form">+ Add User</button>
 
 </section>
 

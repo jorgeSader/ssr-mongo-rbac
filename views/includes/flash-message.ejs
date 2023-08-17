@@ -1,6 +1,6 @@
 <% if (locals.messages) { %>
 <div class="flash-message">
-  <ul class="flash-message__list">
+  <ul class="flash-message--list">
     <% Object.keys(messages).forEach(key => { %> <% 
         messages[key].forEach(message => { %>
     <li class="<%= key %>"><%= message %></li>
