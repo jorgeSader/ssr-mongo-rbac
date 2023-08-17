@@ -1,6 +1,44 @@
 <%- include('./includes/header.ejs') %>
-<section class="card">
-  <h1 class="title">Permissions</h1>
+
+<%- include('./includes/flash-message') %>
+
+<section class="card card-content">
+  <h1 class="title">Manage Users</h1>
+
+  <table class="table">
+    <thead class="table-header">
+      <th scope="col" class="column-header">Id</th>
+      <th scope="col" class="column-header">Email</th>
+      <th scope="col" class="column-header">Role</th>
+    </thead>
+    <tbody>
+      <% userList.forEach(user => { %>
+      <tr class="table-row">
+        <th scope="row" class="table-data">
+          <a href="/admin/users/<%= user.id %>"> <%= user.id %> </a>
+        </th>
+        <td class="table-data">
+          <a href="mailto:<%= user.email %>"> <%= user.email %> </a>
+        </td>
+        <td class="table-data">
+          <form action="/admin/update-role" method="post" class="form-update-role">
+            <input type="hidden" name="userId" value="<%= user.id %>">
+            <select name="role" id="role" class="form-input pulldown-menu">
+              <option value="SUPER_ADMIN" <%= user.role === 'SUPER_ADMIN' ? 'selected' : '' %>>Super-Admin</option>
+              <option value="ADMIN" <%= user.role === 'ADMIN' ? 'selected' : '' %>>Admin</option>
+              <option value="MANAGER" <%= user.role === 'MANAGER' ? 'selected' : '' %>>Manager</option>
+              <option value="EMPLOYEE" <%= user.role === 'EMPLOYEE' ? 'selected' : '' %>>Employee</option>
+              <option value="VENDOR" <%= user.role === 'VENDOR' ? 'selected' : '' %>>Vendor</option>
+              <option value="CLIENT" <%= user.role === 'CLIENT' ? 'selected' : '' %>>Client</option>
+            </select>
+            <input type="submit" value="update" class="form-button inline-button">
+          </form>
+        </td>
+      </tr>
+      <% }) %>
+    </tbody>
+  </table>
+
 </section>
 
 <%- include('./includes/footer.ejs') %>

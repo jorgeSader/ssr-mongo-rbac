@@ -51,11 +51,12 @@ const userSchema = new Schema<IUser, UserModel, IUserMethods, IVirtuals>({
   role: {
     type: String,
     enum: [
+      roles.superAdmin,
       roles.admin,
       roles.manager,
-      roles.superAdmin,
       roles.employee,
-      roles.vendor
+      roles.vendor,
+      roles.client
     ],
     default: roles.employee
   },
