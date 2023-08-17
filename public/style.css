@@ -108,6 +108,10 @@ li>a:hover {
   background-color: #fff;
 }
 
+.card-content {
+  max-width: 64rem;
+}
+
 .o-auth {
   display: flex;
   flex-direction: column;
