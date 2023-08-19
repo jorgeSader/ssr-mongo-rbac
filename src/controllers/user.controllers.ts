@@ -10,11 +10,12 @@ export const getUserList = async (req: Request, res: Response, next: NextFunctio
     return res.redirect('/auth/login');
   }
 
+  // Condition userList to the current user's Role.
   let userList: IUser[] = [];
   if (currentUser.role === 'SUPER_ADMIN') {
-    userList = await User.find().populate('account');
+    userList = await User.find().populate('account').sort({ account: 'asc', id: 'asc' });
   } else {
-    userList = await User.find({ account: currentUser.account.id }).populate('account'); //TODO: change to currentUser.account.id?
+    userList = await User.find({ account: currentUser.account.id }).populate('account');
   }
   return res.render('permissions', { userList, currentUser });
 };

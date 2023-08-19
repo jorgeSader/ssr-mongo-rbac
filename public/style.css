@@ -288,8 +288,9 @@ li>a:hover {
 }
 
 .table-data {
-  padding: 0 2rem;
+  padding: 0 1rem;
   font-weight: 500;
+  font-size: .875rem;
 }
 
 .form-update-role {

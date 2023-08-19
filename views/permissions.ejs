@@ -9,6 +9,9 @@
   <table class="table">
     <thead class="table-header">
       <th scope="col" class="column-header">Id</th>
+      <% if (currentUser.role === 'SUPER_ADMIN') { %>
+      <th scope="col" class="column-header">Account</th>
+      <% } %>
       <th scope="col" class="column-header">Email</th>
       <th scope="col" class="column-header">Role</th>
     </thead>
@@ -18,6 +21,11 @@
         <th scope="row" class="table-data">
           <a href="/admin/user/<%= user.id %>"> <%= user.id %> </a>
         </th>
+        <% if (currentUser.role === 'SUPER_ADMIN') { %>
+        <th scope="row" class="table-data">
+          <a href="/admin/account/<%= user.account.id %>"> <%= user.account.name %> </a>
+        </th>
+        <% } %>
         <td class="table-data">
           <a href="mailto:<%= user.email %>"> <%= user.email %> </a>
         </td>
