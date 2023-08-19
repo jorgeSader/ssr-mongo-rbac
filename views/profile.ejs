@@ -12,6 +12,10 @@
       <p class="profile-value"><%= user.id %></p>
     </div>
     <div>
+      <p class="profile-label">Account</p>
+      <p class="profile-value"><%= user.account.name %> (<%= user.account.id %>)</p>
+    </div>
+    <div>
       <p class="profile-label">Email/Username</p>
       <p class="profile-value"><%= user.email %></p>
     </div>
@@ -21,7 +25,7 @@
     </div>
     <div>
       <p class="profile-label">User Object</p>
-      <pre class="profile-value">
+      <pre class="profile-value code">
         <%= user %>
       </pre>
     </div>

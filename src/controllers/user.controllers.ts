@@ -4,7 +4,7 @@ import mongoose from "mongoose";
 import { roles } from "../utils/constants.js";
 
 export const getUserList = async (req: Request, res: Response, next: NextFunction) => {
-  const currentUser = req.user;
+  const currentUser = req.user; //TODO: get populated account or accountId?
   if (!currentUser) {
     req.flash('error', 'No user found! Please log in.');
     return res.redirect('/auth/login');
@@ -12,16 +12,16 @@ export const getUserList = async (req: Request, res: Response, next: NextFunctio
 
   let userList: IUser[] = [];
   if (currentUser.role === 'SUPER_ADMIN') {
-    userList = await User.find();
+    userList = await User.find().populate('account');
   } else {
-    userList = await User.find({ accountId: currentUser.accountId });
+    userList = await User.find({ account: currentUser.account.id }).populate('account'); //TODO: change to currentUser.account.id?
   }
   return res.render('permissions', { userList, currentUser });
 };
 
 export const getCurrentUser = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const user = await User.findById(req.user!.id);
+    const user = await User.findById(req.user!.id).populate('account');
     if (!user) {
       req.flash('error', 'Invalid ID!');
       res.status(404);
@@ -33,12 +33,13 @@ export const getCurrentUser = async (req: Request, res: Response, next: NextFunc
   }
 
 };
+
 export const getUserById = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const user = await User.findById(req.params.userId);
+    const user = await User.findById(req.params.userId).populate('account');
     if (!user) {
       req.flash('error', 'Invalid ID!');
-      res.redirect('/admin/users');
+      res.redirect('/admin/user');
       return;
     }
     res.render('profile', { user });

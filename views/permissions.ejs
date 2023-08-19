@@ -14,10 +14,9 @@
     </thead>
     <tbody>
       <% userList.forEach(user => { %>
-
       <tr class="table-row">
         <th scope="row" class="table-data">
-          <a href="/admin/users/<%= user.id %>"> <%= user.id %> </a>
+          <a href="/admin/user/<%= user.id %>"> <%= user.id %> </a>
         </th>
         <td class="table-data">
           <a href="mailto:<%= user.email %>"> <%= user.email %> </a>

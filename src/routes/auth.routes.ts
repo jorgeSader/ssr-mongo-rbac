@@ -13,7 +13,7 @@ router.get('/login', ensureLoggedOut({ redirectTo: '/profile' }), getAuthLogin);
 
 // Local Passport Login
 router.post('/login', passport.authenticate('local', {
-  // successRedirect: "/users/profile/",
+  // successRedirect: "/user/profile/",
   successReturnToOrRedirect: "/",
   failureRedirect: "/auth/login",
   failureFlash: true

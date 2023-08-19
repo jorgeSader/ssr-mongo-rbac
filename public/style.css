@@ -305,6 +305,11 @@ li>a:hover {
   min-width: fit-content;
 }
 
+.code {
+  text-wrap: wrap;
+  overflow-wrap: break-word;
+}
+
 .flash-message {}
 
 .flash-message--list {
@@ -341,4 +346,8 @@ li>a:hover {
 .error {
   background-color: #c91818;
   color: #fff;
+}
+
+.required {
+  color: #c91818;
 }

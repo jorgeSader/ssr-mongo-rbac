@@ -10,7 +10,7 @@ passport.serializeUser((user, done) => {
 });
 
 passport.deserializeUser((id, done) => {
-  User.findById(id).then((user) => {
+  User.findById(id).populate('account').then((user) => {
     done(null, user);
   });
 });
@@ -27,7 +27,7 @@ passport.use(
       // Passport callback function
       try {
         // Check if email is already registered
-        const currentUser = await User.findOne({ email: profile.emails![0].value });
+        const currentUser = await User.findOne({ email: profile.emails![0].value }).populate('account');
         if (currentUser) {
           // if email has already been registered check for a googleId.
           if (currentUser.googleId) {
@@ -57,6 +57,7 @@ passport.use(
           done(null, newUser);
         }
       } catch (error) {
+        console.log("🚀 ~ file: passport-google.auth.ts:60 ~ error:", error);
         done(error);
       }
     })

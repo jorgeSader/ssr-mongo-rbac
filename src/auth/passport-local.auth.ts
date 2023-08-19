@@ -8,7 +8,7 @@ passport.serializeUser((user, done) => {
 });
 
 passport.deserializeUser((id, done) => {
-  User.findById(id).then((user) => {
+  User.findById(id).populate('account').then((user) => {
     done(null, user);
   });
 });
@@ -21,7 +21,7 @@ passport.use(
     },
     async (email, password, done) => {
       try {
-        const user = await User.findOne({ email });
+        const user = await User.findOne({ email }).populate('account');
         if (!user) {
           return done(null, false, { message: "User/Email not found." });
         }

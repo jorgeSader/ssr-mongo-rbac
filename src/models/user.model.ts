@@ -2,9 +2,10 @@ import { Model, Schema, Types, model, } from "mongoose";
 import bcrypt from 'bcryptjs';
 import createHttpError from "http-errors";
 import env from 'dotenv';
-import { roles } from "../utils/constants.js";
 
 import Account from "./account.model.js";
+
+import { roles } from "../utils/constants.js";
 
 env.config();
 
@@ -16,7 +17,7 @@ export interface IUser {
   firstName?: string;
   lastName?: string;
   imageUrl?: string;
-  accountId: Types.ObjectId;
+  account: Types.ObjectId;
   role: string;
   projectIds: Types.ObjectId[];
 }
@@ -32,39 +33,42 @@ export interface IVirtuals {
 export type UserModel = Model<IUser, {}, IUserMethods>;
 
 
-const userSchema = new Schema<IUser, UserModel, IUserMethods, IVirtuals>({
-  email: {
-    type: String,
-    required: true,
-    lowercase: true,
-    unique: true,
+const userSchema = new Schema<IUser, UserModel, IUserMethods, IVirtuals>(
+  {
+    email: {
+      type: String,
+      required: true,
+      lowercase: true,
+      unique: true,
+    },
+    password: String,
+    googleId: String,
+    imageUrl: String,
+    firstName: String,
+    lastName: String,
+    account: {
+      type: Schema.Types.ObjectId,
+      ref: 'Account'
+    },
+    role: {
+      type: String,
+      enum: [
+        roles.superAdmin,
+        roles.admin,
+        roles.manager,
+        roles.employee,
+        roles.vendor,
+        roles.client
+      ],
+      default: roles.employee
+    },
+    projectIds: [{
+      type: Schema.Types.ObjectId,
+      ref: 'Project'
+    }],
   },
-  password: String,
-  googleId: String,
-  imageUrl: String,
-  firstName: String,
-  lastName: String,
-  accountId: {
-    type: Schema.Types.ObjectId,
-    ref: 'Account'
-  },
-  role: {
-    type: String,
-    enum: [
-      roles.superAdmin,
-      roles.admin,
-      roles.manager,
-      roles.employee,
-      roles.vendor,
-      roles.client
-    ],
-    default: roles.employee
-  },
-  projectIds: [{
-    type: Schema.Types.ObjectId,
-    ref: 'Project'
-  }],
-});
+  { timestamps: true, }
+);
 
 userSchema.pre('save', async function (next) {
   try {
@@ -73,11 +77,11 @@ userSchema.pre('save', async function (next) {
         const hashedPassword = await bcrypt.hash(this.password, 10);
         this.password = hashedPassword;
       }
-      if (!this.accountId) {
+      if (!this.account) {
         const account = await new Account({
           name: 'ACME,Inc.' // TODO: Make name input dynamic.
         });
-        this.accountId = account.id;
+        this.account = account.id;
         account.save();
         this.role = roles.admin;
       }
@@ -87,10 +91,13 @@ userSchema.pre('save', async function (next) {
     }
     next();
   } catch (error) {
+    console.log("🚀 ~ file: user.model.ts:94 ~ error:", error);
+
     next(error);
   }
 });
 
+// Add method to validate password mongoose metho
 userSchema.methods.isValidPassword = async function (password: string): Promise<boolean> {
   try {
     return await bcrypt.compare(password, this.password);

@@ -6,7 +6,7 @@
       <% if (user) { %>
       <li class="navbar-menu_link"><a href="/profile">Profile</a> </li>
       <% if (user.role === 'ADMIN' || user.role === 'SUPER_ADMIN') { %>
-      <li class="navbar-menu_link"><a href="/admin/users">Permissions</a> </li>
+      <li class="navbar-menu_link"><a href="/admin/user">Permissions</a> </li>
       <% } %>
       <li class="navbar-menu_link"><a href="/auth/logout">Logout</a> </li>
       <% } else { %>

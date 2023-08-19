@@ -15,6 +15,7 @@ import "../dist/auth/passport-local.auth.js";
 import "../dist/auth/passport-google.auth.js";
 
 import homeRoutes from './routes/index.routes.js';
+import accountRoutes from './routes/account.routes.js';
 import authRoutes from './routes/auth.routes.js';
 import userRoutes from './routes/user.routes.js';
 import adminRoutes from './routes/admin.routes.js';
@@ -77,9 +78,10 @@ app.use((req, res, next) => {
 // Routes
 app.use('/', homeRoutes);
 app.use('/auth', authRoutes);
+app.use('/account', ensureLoggedIn({ redirectTo: '/auth/login' }), accountRoutes);
 app.use('/admin', ensureLoggedIn({ redirectTo: '/auth/login' }), adminRoutes);
 app.use('/profile', ensureLoggedIn({ redirectTo: '/auth/login' }), profileRoutes);
-app.use('/users', ensureLoggedIn({ redirectTo: '/auth/login' }), userRoutes);
+app.use('/user', ensureLoggedIn({ redirectTo: '/auth/login' }), userRoutes);
 
 app.use((req, res, next) => {
   next(createHttpError.NotFound());
