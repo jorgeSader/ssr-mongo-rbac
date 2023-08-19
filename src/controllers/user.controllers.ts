@@ -4,7 +4,7 @@ import mongoose from "mongoose";
 import { roles } from "../utils/constants.js";
 
 export const getUserList = async (req: Request, res: Response, next: NextFunction) => {
-  const currentUser = req.user; //TODO: get populated account or accountId?
+  const currentUser = req.user;
   if (!currentUser) {
     req.flash('error', 'No user found! Please log in.');
     return res.redirect('/auth/login');
@@ -13,7 +13,7 @@ export const getUserList = async (req: Request, res: Response, next: NextFunctio
   // Condition userList to the current user's Role.
   let userList: IUser[] = [];
   if (currentUser.role === 'SUPER_ADMIN') {
-    userList = await User.find().populate('account').sort({ account: 'asc', id: 'asc' });
+    userList = await User.find().populate('account').sort({ account: 'desc', id: 'asc' });
   } else {
     userList = await User.find({ account: currentUser.account.id }).populate('account');
   }
