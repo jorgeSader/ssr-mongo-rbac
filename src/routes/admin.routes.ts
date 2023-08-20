@@ -9,19 +9,19 @@ import { getAccountById, getAccountList } from "../controllers/account.controlle
 const router = express.Router();
 
 // GET /admin/ - Should Render admin page but currently renders home ('/').
-router.get('/', ensureLoggedIn('/auth/login'), (req, res) => { res.render('index'); }); // TODO: see comment above
+router.get('/', (req, res) => { res.render('index'); }); // TODO: see comment above
 
 // GET /admin/account/ - get all registered accounts (requires SuperAdmin) 
-router.get('/account', ensureLoggedIn('/auth/login'), ensureRole([roles.superAdmin]), getAccountList);
+router.get('/account', ensureRole([roles.superAdmin]), getAccountList);
 
 // GET /admin/account/:accountId - get a registered account by ID (requires SuperAdmin) 
-router.get('/account/:accountId', ensureLoggedIn('/auth/login'), ensureRole([roles.superAdmin]), getAccountById);
+router.get('/account/:accountId', ensureRole([roles.superAdmin]), getAccountById);
 
 
-router.get('/user', ensureLoggedIn('/auth/login'), ensureRole([roles.superAdmin, roles.admin]), getUserList);
+router.get('/user', ensureRole([roles.superAdmin, roles.admin]), getUserList);
 
-router.get('/user/:userId', ensureLoggedIn('/auth/login'), ensureRole([roles.superAdmin, roles.admin]), getUserById);
+router.get('/user/:userId', ensureRole([roles.superAdmin, roles.admin]), getUserById);
 
-router.post('/update-role', ensureLoggedIn('/auth/login'), ensureRole([roles.superAdmin, roles.admin]), updateRole);
+router.post('/update-role', ensureRole([roles.superAdmin, roles.admin]), updateRole);
 
 export default router;
