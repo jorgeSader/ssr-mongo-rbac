@@ -2,7 +2,6 @@ import { validationResult } from "express-validator";
 
 import Account from "../models/account.model.js";
 import User from "../models/user.model.js";
-import { getAccountById } from "./account.controllers.js";
 import mongoose from "mongoose";
 
 
