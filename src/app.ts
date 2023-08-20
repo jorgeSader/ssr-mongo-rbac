@@ -1,4 +1,5 @@
 import express from 'express';
+import cors from 'cors';
 import createHttpError from 'http-errors';
 import morgan from 'morgan';
 import mongoose from 'mongoose';
@@ -42,6 +43,7 @@ store.on('error', (error) => { console.error(error); });
 
 // Middleware
 app.use(express.static('public'));
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
