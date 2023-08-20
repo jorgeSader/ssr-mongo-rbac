@@ -17,34 +17,34 @@ export const getUserList = async (req: Request, res: Response, next: NextFunctio
   } else {
     userList = await User.find({ account: currentUser.account.id }).populate('account');
   }
-  return res.render('permissions', { userList, currentUser });
+  return res.render('permissions', { userList, currentUser, selectedUser: false });
 };
 
-export const getCurrentUser = async (req: Request, res: Response, next: NextFunction) => {
-  try {
-    const user = await User.findById(req.user!.id).populate('account');
-    if (!user) {
-      req.flash('error', 'Invalid ID!');
-      res.status(404);
-    }
-    res.status(200).send(user);
-
-  } catch (error) {
-    next(error);
-  }
-
-};
+// export const getCurrentUser = async (req: Request, res: Response, next: NextFunction) => {
+//   try {
+//     const user = await User.findById(req.user!.id).populate('account');
+//     if (!user) {
+//       req.flash('error', 'Invalid ID!');
+//       res.status(404);
+//     }
+//     res.status(200).send(user);
+// 
+//   } catch (error) {
+//     next(error);
+//   }
+// 
+// };
 
 export const getUserById = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const currentUser = req.user;
-    const user = await User.findById(req.params.userId).populate('account');
-    if (!user) {
+    const selectedUser = await User.findById(req.params.userId).populate('account');
+    if (!selectedUser) {
       req.flash('error', 'Invalid ID!');
-      res.redirect('/admin/user');
+      res.redirect('/admin/user'); selectedUser;
       return;
     }
-    res.render('profile', { user, currentUser });
+    res.render('profile', { currentUser, selectedUser });
   } catch (error) {
     next(error);
   }

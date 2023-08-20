@@ -38,7 +38,10 @@ passport.use(
             currentUser.googleId = profile.id;
             currentUser.firstName = profile.name?.givenName;
             currentUser.lastName = profile.name?.familyName;
-            currentUser.imageUrl = currentUser.imageUrl || profile.photos![0].value || '../../public/avatar-1577909.svg';
+            if (!currentUser.imageUrl || currentUser.imageUrl === '../../image/avatar-1577909.svg') {
+              currentUser.imageUrl = profile.photos![0].value;
+              console.log("🚀 ~ file: passport-google.auth.ts:43 ~ currentUser.imageUrl:", currentUser.imageUrl);
+            }
 
             const updatedUser = await currentUser.save();
             done(null, updatedUser);
@@ -50,7 +53,7 @@ passport.use(
             email: profile.emails![0].value,
             firstName: profile.name?.givenName,
             lastName: profile.name?.familyName,
-            imageUrl: profile.photos![0].value || '../../public/avatar-1577909.svg',
+            imageUrl: profile.photos![0].value || '../../image/avatar-1577909.svg',
           });
 
           const newUser = await user.save();

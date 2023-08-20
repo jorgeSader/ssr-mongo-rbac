@@ -19,21 +19,24 @@
       <% userList.forEach(user => { %>
       <tr class="table-row">
         <th scope="row" class="table-data">
-          <a href="/admin/user/<%= user.id %>"> <%= user.id %> </a>
+          <a href="/admin/user/<%= user.id %>">
+            <%= user.id %> </a>
         </th>
         <% if (currentUser.role === 'SUPER_ADMIN') { %>
         <th scope="row" class="table-data">
-          <a href="/admin/account/<%= user.account.id %>"> <%= user.account.name %> </a>
+          <a href="/admin/account/<%= user.account.id %>">
+            <%=  user.account.name %> </a>
         </th>
         <% } %>
         <td class="table-data">
-          <a href="mailto:<%= user.email %>"> <%= user.email %> </a>
+          <a href="mailto:<%= user.email %>">
+            <%= user.email %> </a>
         </td>
         <td class="table-data">
           <form action="/admin/update-role" method="post" class="form-update-role">
             <input type="hidden" name="userId" value="<%= user.id %>">
             <select name="role" id="role" class="form-input pulldown-menu">
-              <% if (currentUser.role === 'SUPER_ADMIN') { %>
+              <% if (user.role === 'SUPER_ADMIN') { %>
               <option value="SUPER_ADMIN" <%= user.role === 'SUPER_ADMIN' ? 'selected' : '' %>>Super-Admin
               </option>
               <% } %>
