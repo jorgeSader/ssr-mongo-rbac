@@ -37,13 +37,14 @@ export const getCurrentUser = async (req: Request, res: Response, next: NextFunc
 
 export const getUserById = async (req: Request, res: Response, next: NextFunction) => {
   try {
+    const currentUser = req.user;
     const user = await User.findById(req.params.userId).populate('account');
     if (!user) {
       req.flash('error', 'Invalid ID!');
       res.redirect('/admin/user');
       return;
     }
-    res.render('profile', { user });
+    res.render('profile', { user, currentUser });
   } catch (error) {
     next(error);
   }
