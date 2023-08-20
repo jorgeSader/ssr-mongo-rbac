@@ -88,6 +88,9 @@ userSchema.pre('save', async function (next) {
       if (this.email.toLowerCase() === process.env.SUPER_ADMIN_EMAIL?.toLowerCase()) {
         this.role = roles.superAdmin;
       }
+      if (!this.imageUrl) {
+        this.imageUrl = '../../image/avatar-1577909.svg';
+      }
     }
     next();
   } catch (error) {
@@ -97,7 +100,7 @@ userSchema.pre('save', async function (next) {
   }
 });
 
-// Add method to validate password mongoose metho
+// Add method to validate password 
 userSchema.methods.isValidPassword = async function (password: string): Promise<boolean> {
   try {
     return await bcrypt.compare(password, this.password);

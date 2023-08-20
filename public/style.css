@@ -244,6 +244,11 @@ li>a:hover {
   font-weight: 400;
 }
 
+.profile-image {
+  width: 6rem;
+  height: 6rem;
+}
+
 .go-back {
   margin-right: 0.5rem;
   margin-left: -0.5rem;
