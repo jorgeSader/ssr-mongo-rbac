@@ -33,7 +33,7 @@ export const postAuthRegister = async (req: any, res: any, next: any) => {
       errors.array().forEach(error => {
         req.flash('error', error.msg);
       });
-      res.render('register', { email: req.body.email, password: req.body.password, accountId: req.body.accountId, messages: req.flash() });
+      res.render('register', { email: req.body.email.trim(), password: req.body.password.trim(), accountId: req.body.accountId.trim(), messages: req.flash() });
     }
 
     const { email, accountId } = req.body;
@@ -48,21 +48,31 @@ export const postAuthRegister = async (req: any, res: any, next: any) => {
       return;
     }
 
-    // Create new user if it doesn't.
+    // Create new user.
     const user = new User(req.body);
 
-    // If we got an Account ID, Verify that it is a valid mongoID and that the account exists.
-    const isMongoId = mongoose.Types.ObjectId.isValid(accountId);
-    const account = await Account.findById(accountId);
-
-    // If the account exists add its ID to the newly created user.
-    if (isMongoId && account) {
+    // Check if an accountId was provided.
+    if (accountId && accountId.length > 0) {
+      // Check that it is a valid Mongo ID
+      const isValidMongoId = mongoose.Types.ObjectId.isValid(accountId);
+      if (!isValidMongoId) {
+        req.flash('error', `Invalid Account ID / Invite Code.`);
+        return res.redirect('back');
+      }
+      // Look for existing account
+      const existingAccount = await Account.findOne({ account: accountId });
+      if (!existingAccount) {
+        req.flash('error', `Invalid Account ID / Invite Code.`);
+        return res.redirect('back');
+      }
+      // Assign accountId to new user
       user.account = accountId;
     }
 
     // Save the user to the DB and redirect to login.
     const newUser = await user.save();
     req.flash('success', `${newUser.email} Registered successfully. You can now log in.`);
+    res.locals.email = newUser.email;
     res.redirect('/auth/login');
 
   } catch (error) {
