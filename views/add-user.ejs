@@ -1,0 +1,30 @@
+<%- include('./includes/header.ejs') %>
+
+<h1 class="title">Add User</h1>
+<section class="content">
+  <div class="card">
+    <form action="/auth/register" method="post" class="form">
+      <h2 class="form-title">Add User</h2>
+      <div class="form-item">
+        <label class="form-label" for="email">Email/Username <span class="required">*</span></label>
+        <input class="form-input" type="email" name="email" id="email" placeholder="Email"
+          value="<%= locals.email ? email : ''  %>">
+      </div>
+      <div class="form-item">
+        <label class="form-label" for="password">Password <span class="required">*</span></label>
+        <div class="password">
+          <input class="password-input" type="password" name="password" id="password" placeholder="Password"
+            value="<%= locals.password ? password : ''  %>">
+          <img src="../../image/hide-64.png" alt="Show password icon" onclick="togglePasswordView()"
+            class="password-icon" id="password-icon">
+        </div>
+      </div>
+      <input class="form-input" type="hidden" name="accountId" value="<%= accountId  %>">
+      <div>
+        <button class="button button--form" type="submit">+ Add User</button>
+      </div>
+    </form>
+  </div>
+</section>
+
+<%- include('./includes/footer.ejs') %>
