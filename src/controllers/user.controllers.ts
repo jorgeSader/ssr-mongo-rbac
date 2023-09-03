@@ -103,7 +103,7 @@ export const postUserAdd = async (req: any, res: any, next: any) => {
       });
     }
 
-    const { email } = req.body;
+    const { email, accountId } = req.body;
 
     // Look for existing user
     const existingUser = await User.findOne({ email });
@@ -115,8 +115,9 @@ export const postUserAdd = async (req: any, res: any, next: any) => {
       return;
     }
 
-    // Create new user if it doesn't.
+    // Create new user with same account ID if it doesn't.
     const user = new User(req.body);
+    user.account = accountId;
 
     // Save the user to the DB and redirect back to permissions.
     const newUser = await user.save();

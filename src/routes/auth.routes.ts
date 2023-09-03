@@ -14,7 +14,7 @@ router.get('/login', ensureLoggedOut({ redirectTo: '/profile' }), getAuthLogin);
 // Local Passport Login
 router.post('/login', passport.authenticate('local', {
   // successRedirect: "/user/profile/",
-  successReturnToOrRedirect: "/",
+  successReturnToOrRedirect: "/profile",
   failureRedirect: "/auth/login",
   failureFlash: true
 })
@@ -29,7 +29,7 @@ router.get('/google', passport.authenticate('google', {
 
 // Google Passport Redirect
 router.get('/google/redirect', passport.authenticate('google'), (req, res) => {
-  res.redirect('/');
+  res.redirect('/profile');
 });
 
 //==================// Instagram Passport Strategy //==================//

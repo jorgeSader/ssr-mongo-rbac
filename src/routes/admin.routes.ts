@@ -5,6 +5,7 @@ import { ensureRole } from "../auth/basic.auth.js";
 import { roles } from "../utils/constants.js";
 import { getAddUser, getUserById, getUserList, postUserAdd, updateRole } from "../controllers/user.controllers.js";
 import { getAccountById, getAccountList } from "../controllers/account.controllers.js";
+import { registerValidator } from "../utils/validators.js";
 
 const router = express.Router();
 
@@ -22,7 +23,7 @@ router.get('/user', ensureRole([roles.superAdmin, roles.admin]), getUserList);
 
 router.get('/user/add', ensureRole([roles.superAdmin, roles.admin]), getAddUser);
 
-router.post('/user/add', ensureRole([roles.superAdmin, roles.admin]), postUserAdd);
+router.post('/user/add', ensureRole([roles.superAdmin, roles.admin]), registerValidator, postUserAdd);
 
 router.get('/user/:userId', ensureRole([roles.superAdmin, roles.admin]), getUserById);
 
