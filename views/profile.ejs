@@ -1,38 +1,35 @@
 <%- include('./includes/header.ejs') %>
 
-<h1 class="title">User Profile</h1>
-<section class="content">
-  <article class="card">
-    <h2 class="profile-title"> <span class="go-back" onclick="window.history.back()">🡨</span>User Profile</h2>
-    <div>
-      <img src="<%= selectedUser ? selectedUser.imageUrl : currentUser.imageUrl %>"
-        alt="<%= selectedUser ? selectedUser.firstName : currentUser.firstName +"'s" || 'user' %> avatar"
-        class="profile-image">
-    </div>
-    <div>
-      <p class="profile-label">ID</p>
-      <p class="profile-value"><%= selectedUser ? selectedUser.id : currentUser.id %></p>
-    </div>
-    <div>
-      <p class="profile-label">Account</p>
-      <p class="profile-value"><%= selectedUser ? selectedUser.account.name : currentUser.account.name %>
-        (<%= selectedUser ? selectedUser.account.id : currentUser.account.id %>)</p>
-    </div>
-    <div>
-      <p class="profile-label">Email/Username</p>
-      <p class="profile-value"><%= selectedUser ? selectedUser.email : currentUser.email %></p>
-    </div>
-    <div>
-      <p class="profile-label">Role</p>
-      <p class="profile-value"><%= selectedUser ? selectedUser.role : currentUser.role%></p>
-    </div>
-    <div>
-      <p class="profile-label">User Object</p>
-      <pre class="profile-value code">
+<article class="card">
+  <h2 class="profile-title"> <span class="go-back" onclick="window.history.back()">🡨</span>User Profile</h2>
+  <div>
+    <img src="<%= selectedUser ? selectedUser.imageUrl : currentUser.imageUrl %>"
+      alt="<%= selectedUser ? selectedUser.firstName : currentUser.firstName +"'s" || 'user' %> avatar"
+      class="profile-image">
+  </div>
+  <div>
+    <p class="profile-label">ID</p>
+    <p class="profile-value"><%= selectedUser ? selectedUser.id : currentUser.id %></p>
+  </div>
+  <div>
+    <p class="profile-label">Account</p>
+    <p class="profile-value"><%= selectedUser ? selectedUser.account.name : currentUser.account.name %>
+      (<%= selectedUser ? selectedUser.account.id : currentUser.account.id %>)</p>
+  </div>
+  <div>
+    <p class="profile-label">Email/Username</p>
+    <p class="profile-value"><%= selectedUser ? selectedUser.email : currentUser.email %></p>
+  </div>
+  <div>
+    <p class="profile-label">Role</p>
+    <p class="profile-value"><%= selectedUser ? selectedUser.role : currentUser.role%></p>
+  </div>
+  <div>
+    <p class="profile-label">User Object</p>
+    <pre class="profile-value code">
         <%= selectedUser || currentUser %>
       </pre>
-    </div>
-  </article>
-</section>
+  </div>
+</article>
 
 <%- include('./includes/footer.ejs') %>

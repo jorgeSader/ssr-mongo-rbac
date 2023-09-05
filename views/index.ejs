@@ -1,155 +1,200 @@
 <%- include('./includes/header.ejs') %>
 
-<article class="card card-content">
+<article>
+  <div class="desktop-card">
 
-  <section class="hero">
-    <div class="content content__hero">
-      <h1 class="title hero__title">Demystifying Role-Based Access Control (RBAC)</h1>
-      <p class="hero__paragraph">
-        The learnings and challenges of implementing Role-Based Access Control (RBAC) at production level.
+    <section class="hero">
+      <div class="content content__hero">
+        <h1 class="title hero__title">Demystifying RBAC</h1>
+        <p class="hero__paragraph">
+          The learnings and challenges of implementing Role-Based Access Control (RBAC) at production level.
+        </p>
+      </div>
+    </section>
+
+    <section class="intro">
+      <p class="paragraph home__paragraph"> Hey there, curious minds and fellow tech aficionados! Welcome to
+        Demystifying
+        Role-Based Access Control (RBAC) - a project built to learn and explore the ins and outs of Role-Based Access
+        Control (RBAC) at production level. Do read along as I share my experiences, stack choices, main features, as
+        well
+        as some of the golden nuggets that I gained from wrangling RBAC's complexity.
       </p>
-    </div>
-  </section>
+    </section>
 
-  <section class="intro">
-    <p class="paragraph home__paragraph"> Hey there, curious minds and fellow tech aficionados! Welcome to my tech
-      playground – a
-      project that took me on an exhilarating journey through the realm of Role-Based Access Control (RBAC). Buckle up
-      as I share my experiences, stack choices, main features, and the wisdom I gained from wrangling RBAC's complexity.
-    </p>
-  </section>
+    <section class="overview">
+      <h2 class="heading">
+        Project Overview: Unlocking RBAC's Potential
+      </h2>
+      <p class="paragraph">
+        In this project, I set out to craft a web app that serves as an RBAC showcase. The goal wasn't just to create an
+        app but to dive deep into RBAC's benefits, while also grappling with its challenges. This portfolio piece
+        encapsulates my growth as a software engineer, offering insights into my approach, struggles, and triumphs.
+      </p>
+    </section>
 
-  <section class="overview">
-    <h2 class="heading">
-      Project Overview: Unlocking RBAC's Potential
-    </h2>
-    <p class="paragraph">
-      In this project, I set out to craft a web app that serves as an RBAC showcase. The goal wasn't just to create an
-      app but to dive deep into RBAC's benefits, while also grappling with its challenges. This portfolio piece
-      encapsulates my growth as a software engineer, offering insights into my approach, struggles, and triumphs.
-    </p>
-  </section>
+    <section class="tech-stack">
+      <h2 class="heading">
+        Tech Stack: The Building Blocks
+      </h2>
+      <p class="paragraph">
+        I crafted this project using a blend of technologies that synergize seamlessly:
+      </p>
+      <ul class="u-list">
+        <li class="list-item">
+          <span class="emphasis">MongoDB with Mongoose:</span> MongoDB proved to be the perfect partner for data
+          storage,
+          with Mongoose adding a layer of elegance to the database interactions, making data management a breeze.
+        </li>
+        <li class="list-item">
+          <span class="emphasis">Express and Node.js:</span> I harnessed the power of Express, a fast Node.js framework,
+          to lay the groundwork for the backend. Its routing prowess and middleware support were essential for creating
+          a
+          robust foundation.
+        </li>
+        <li class="list-item">
+          <span class="emphasis">Passport and Authentication:</span> For authentication, Passport came to the rescue. By
+          integrating passport-local and several of its most popular strategies, I ensured secure user authentication
+          with
+          password hashing via bcryptjs.
+        </li>
+        <li class="list-item">
+          <span class="emphasis">Session Management:</span> Express-session and connect-mongodb-session stepped in to
+          handle session management, ensuring a secure and scalable user experience.
+        </li>
+        <li class="list-item">
+          <span class="emphasis">Validation Vigilance:</span> Express-validator stood guard, keeping user inputs in
+          check
+          and fortifying the app against potential vulnerabilities.
+        </li>
+        <li class="list-item">
+          <span class="emphasis">EJS Templating:</span> I wielded EJS to create dynamic and interactive user interfaces
+          on
+          the frontend, delivering a compelling user experience.
+        </li>
+      </ul>
+    </section>
 
-  <section class="tech-stack">
-    <h2 class="heading">
-      Tech Stack: The Building Blocks
-    </h2>
-    <p class="paragraph">
-      I crafted this project using a blend of technologies that synergize seamlessly:
-    </p>
-    <ul class="u-list">
-      <li class="list-item">
-        <span class="emphasis">MongoDB with Mongoose:</span> MongoDB proved to be the perfect partner for data
-        storage,
-        with Mongoose adding a layer of elegance to the database interactions, making data management a breeze.
-      </li>
-      <li class="list-item">
-        <span class="emphasis">Express and Node.js:</span> I harnessed the power of Express, a fast Node.js framework,
-        to lay the groundwork for the backend. Its routing prowess and middleware support were essential for creating
-        a
-        robust foundation.
-      </li>
-      <li class="list-item">
-        <span class="emphasis">Passport and Authentication:</span> For authentication, Passport came to the rescue. By
-        integrating passport-local and several of its most popular strategies, I ensured secure user authentication
-        with
-        password hashing via bcryptjs.
-      </li>
-      <li class="list-item">
-        <span class="emphasis">Session Management:</span> Express-session and connect-mongodb-session stepped in to
-        handle session management, ensuring a secure and scalable user experience.
-      </li>
-      <li class="list-item">
-        <span class="emphasis">Validation Vigilance:</span> Express-validator stood guard, keeping user inputs in
-        check
-        and fortifying the app against potential vulnerabilities.
-      </li>
-      <li class="list-item">
-        <span class="emphasis">EJS Templating:</span> I wielded EJS to create dynamic and interactive user interfaces
-        on
-        the frontend, delivering a compelling user experience.
-      </li>
-    </ul>
-  </section>
+    <section class="features">
+      <h2 class="heading">
+        Main Features: Tackling Access Control Challenges
+      </h2>
+      <ul class="u-list">
+        <li class="list-item">
+          <span class="emphasis">🔒 Role Management: </span> I empowered the app to seamlessly create, edit, and manage
+          roles, tailoring access levels according to user responsibilities.
+        </li>
+        <li class="list-item">
+          <span class="emphasis">🌐 User Administration: </span> The user management module allowed smooth user
+          handling,
+          role assignment, and access permission control, keeping security and compliance intact.
+        </li>
+        <li class="list-item">
+          <span class="emphasis">🛡️ Fine-Grained Permissions: </span>I ventured into the realm of precise permissions,
+          ensuring that each user was granted access only to the resources relevant to their role.
+        </li>
+        <li class="list-item">
+          <span class="emphasis">🚀 Scalability: </span>The implementation's scalability was woven into every layer,
+          thanks
+          to the robust nature of Express and MongoDB, ensuring the app's readiness for growth.
+        </li>
+      </ul>
+    </section>
 
-  <section class="features">
-    <h2 class="heading">
-      Main Features: Tackling Access Control Challenges
-    </h2>
-    <ul class="u-list">
-      <li class="list-item">
-        <span class="emphasis">🔒 Role Management: </span> I empowered the app to seamlessly create, edit, and manage
-        roles, tailoring access levels according to user responsibilities.
-      </li>
-      <li class="list-item">
-        <span class="emphasis">🌐 User Administration: </span> The user management module allowed smooth user handling,
-        role assignment, and access permission control, keeping security and compliance intact.
-      </li>
-      <li class="list-item">
-        <span class="emphasis">🛡️ Fine-Grained Permissions: </span>I ventured into the realm of precise permissions,
-        ensuring that each user was granted access only to the resources relevant to their role.
-      </li>
-      <li class="list-item">
-        <span class="emphasis">🚀 Scalability: </span>The implementation's scalability was woven into every layer,
-        thanks
-        to the robust nature of Express and MongoDB, ensuring the app's readiness for growth.
-      </li>
-    </ul>
-  </section>
+    <section class="learnings">
+      <h2 class="heading">
+        Learnings and Challenges: The Road Less Traveled
+      </h2>
+      <p class="paragraph">
+        Throughout this project, I gained invaluable insights:
+      </p>
+      <h3>Takeaways:</h3>
+      <ul>
+        <li class="list-item">
+          <span class="emphasis">Effective Role Hierarchy is the Backbone: </span> Establishing a logical and
+          well-thought-out role hierarchy is fundamental in RBAC implementation. It simplifies access control,
+          streamlines user management, and ensures consistency in permissions across user groups.
+        </li>
+        <li class="list-item">
+          <span class="emphasis">Balancing Security with User Experience is an Art: </span> Striking the right balance
+          between robust security measures and a user-friendly interface is a delicate yet essential aspect of
+          application development. It's about crafting an experience that keeps data safe without compromising
+          usability.
+        </li>
+        <li class="list-item">
+          <span class="emphasis">Fine-Grained Access Control is a Game-Changer: </span> Implementing fine-grained
+          access control through RBAC enhances data security. It allows users to access only what's necessary for
+          their roles, minimizing the risk of unauthorized actions and data breaches.
+        </li>
+      </ul>
+      <h3>Challenges:</h3>
+      <ul>
+        <li class="list-item">
+          <span class="emphasis">Dynamic Permissions Dilemma: </span>Implementing dynamic permissions presented a
+          puzzle - balancing adaptability and security was a test of my problem-solving skills.
+        </li>
+        <li class="list-item">
+          <span class="emphasis">Complexity Juggling: </span>As the app grew, so did the complexity of role
+          definitions and permissions, demanding disciplined organization and thorough documentation.
+        </li>
+        <li class="list-item">
+          <span class="emphasis">UI Harmonization: </span>Crafting a user interface that marries usability with
+          security was a meticulous endeavor, involving constant iteration and refinement.
+        </li>
+      </ul>
+    </section>
 
-  <section class="learnings">
-    <h2 class="heading">
-      Learnings and Challenges: The Road Less Traveled
-    </h2>
-    <p class="paragraph">
-      Throughout this project, I gained invaluable insights:
-    </p>
-    <ul>
-      <li>
-        <h3>Takeaways:</h3>
-        <ul>
-          <li class="list-item">
-            <span class="emphasis">Role Hierarchy Logic: </span> Designing a coherent role hierarchy is pivotal for
-            seamless
-            access management and data security.
-          </li>
-          <li class="list-item">
-            <span class="emphasis">Rigorous Testing Pays Off: </span> Rigorous testing led me to uncover potential
-            vulnerabilities and improve the app's resilience.
-          </li>
-          <li class="list-item">
-            <span class="emphasis">Balancing Act: </span> Finding equilibrium between user experience and security
-            requires a delicate dance, where each aspect complements the other.
-          </li>
-        </ul>
-      <li>
-        <h3>Challenges:</h3>
-        <ul>
-          <li class="list-item">
-            <span class="emphasis">Dynamic Permissions Dilemma: </span>Implementing dynamic permissions presented a
-            puzzle – balancing adaptability and security was a test of my problem-solving skills.
-          </li>
-          <li class="list-item">
-            <span class="emphasis">Complexity Juggling: </span>As the app grew, so did the complexity of role
-            definitions and permissions, demanding disciplined organization and thorough documentation.
-          </li>
-          <li class="list-item">
-            <span class="emphasis">UI Harmonization: </span>Crafting a user interface that marries usability with
-            security was a meticulous endeavor, involving constant iteration and refinement.
-          </li>
-        </ul>
-      </li>
-    </ul>
-  </section>
+    <section class="conclusion">
+      <h2 class="heading">
+        Conclusion: Unveiling the Power of RBAC for Web Security
+      </h2>
+      <p class="paragraph">
+        RBAC, or Role-Based Access Control, is a security concept that's super handy for web developers. Think of it as
+        assigning different roles to users in your web app.
+      </p>
+      <p>
+        In the journey of crafting "Demystifying RBAC", I've delved into the intricate world of Role-Based Access
+        Control
+        (RBAC) and emerged with a robust web application that showcases the prowess of this security paradigm. This
+        project has been more than just lines of code; it's been an exploration, a learning experience, and a testament
+        to
+        the possibilities of RBAC in web development.
+      </p>
+      <p>
+        As I wrap up this project, I'm reminded of the significance of RBAC in bolstering web security. It's not just
+        about code; it's about empowering users with the right access, safeguarding data, and ensuring compliance. With
+        RBAC, I've witnessed the magic of creating well-defined roles, assigning granular permissions, and maintaining a
+        seamless user experience.
+      </p>
+      <p>
+        The technology stack I've employed, from Express to MongoDB and Passport, has proven itself to be a formidable
+        toolkit for web application development. It's the combination of these tools, thoughtfully orchestrated, that
+        has
+        brought "Demystifying RBAC" to life.
+      </p>
+      <p>
+        This project has not only fortified my technical skills but has also honed my ability to balance user-centric
+        design with stringent security measures. It's a reminder that in the digital landscape, a harmonious blend of
+        both
+        is key to building applications that users can trust and enjoy.
+      </p>
+      <p>
+        As I reflect on the journey, I take away the importance of role hierarchy, the significance of rigorous testing,
+        and the art of harmonizing user interfaces. These lessons will undoubtedly guide my future endeavors in web
+        development and security.
+      </p>
+      <p>
+        In closing, "Demystifying RBAC" stands not just as a portfolio piece but as a testament to the power of RBAC in
+        web
+        security. It's an invitation to explore the world of access control and a demonstration of how technology can be
+        harnessed to create safer, more user-friendly digital experiences.
+      </p>
+      <p>
+        Best of all... The journey continues, and I'm excited to see where it leads next.
+      </p>
+    </section>
 
-  <section class="conclusion">
-    <p class="paragraph">
-      This portfolio piece isn't just about an app; it's a testament to my journey as a software engineer, showcasing
-      how I navigated the complexities of RBAC, fortified the app's security, and embraced challenges with open arms.
-      Join me in exploring the RBAC adventure – let's dive into the code and uncover the magic together!
-    </p>
-  </section>
-
+  </div>
 </article>
 
 <%- include('./includes/footer.ejs') %>
