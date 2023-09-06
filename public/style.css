@@ -102,6 +102,7 @@ section {
 
 .title {
   margin-bottom: 1em;
+  text-align: center;
 }
 
 /* forms */
@@ -138,6 +139,7 @@ section {
 .content {
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-evenly;
 }
 
 .heading {
@@ -160,6 +162,7 @@ section {
   color: #fff;
   font-size: 2rem;
   margin-bottom: 1em;
+  text-align: left;
 }
 
 .hero__paragraph {
@@ -176,6 +179,8 @@ section {
   padding: 1em 2em;
   background: purple;
   color: white;
+  text-align: center;
+  line-height: 1.5rem;
   margin: 0.5em 0;
   border-radius: .25rem;
   box-shadow: 2px 2px 2px rgba(0, 0, 0, .26);
@@ -267,18 +272,16 @@ section {
   padding: 0.75em 1em;
   font-weight: 600;
   text-align: center;
-  width: 100%;
   font-size: 1.1rem;
 }
 
-.button__form--add {
-  width: unset;
-}
-
+/* .button__form--add {
+  width: 100%;
+} */
 .button--inline {
   padding: .25rem 1rem;
   font-size: inherit;
-  margin: 0.5rem 0 0.5rem 2rem;
+  margin: 0.5rem 0 0.5rem 1rem;
   font-weight: 500;
 }
 
@@ -307,6 +310,8 @@ section {
 .profile-image {
   width: 6rem;
   height: 6rem;
+  border-radius: 1rem;
+  box-shadow: 2px 2px 2px rgba(128, 0, 128, .26);
 }
 
 .go-back {
@@ -332,6 +337,8 @@ section {
 }
 
 .table {
+  display: flex;
+  flex-direction: column;
   background-color: #fff;
   border-collapse: collapse;
   border-spacing: 0;
@@ -345,8 +352,32 @@ section {
   color: #fff;
 }
 
+.table-header-row {
+  display: none;
+  justify-content: space-evenly;
+}
+
 .column-header {
+  display: flex;
   padding: .75rem 1rem;
+}
+
+.table-body {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.table-row {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  background-color: #ffeeff;
+  border-radius: 1rem;
+  box-shadow: 2px 2px 2px rgba(128, 0, 128, .16);
+  margin: 1rem;
+  padding: 1rem 0;
+  min-width: 252px;
 }
 
 .table-row:hover {
@@ -362,6 +393,7 @@ section {
 .form-update-role {
   display: flex;
   align-items: center;
+  min-width: 220px;
 }
 
 .pulldown-menu {
@@ -421,6 +453,12 @@ section {
   color: #c91818;
 }
 
+.desktop-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
 /* Tablet view */
 @media screen and (min-width: 768px) {
   .card {
@@ -450,6 +488,37 @@ section {
   .hero__paragraph {
     font-size: 2rem;
     width: 75%;
+  }
+
+  .table-header {
+    display: inline-block;
+  }
+
+  .table-body {
+    flex-direction: column;
+  }
+
+  .table-header-row {
+    display: flex;
+    /* justify-content: space-evenly; */
+  }
+
+  .table-row {
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 0;
+    padding: 0;
+    background-color: white;
+    align-items: center;
+    border-radius: 4px;
+  }
+
+  .table-data {
+    min-width: unset;
+  }
+
+  .user-id {
+    flex-shrink: 2;
   }
 }
 
